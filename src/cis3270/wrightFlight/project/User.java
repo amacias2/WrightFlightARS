@@ -4,6 +4,7 @@ public class User {
 
 
 	private String firstName;
+	private String midName;
 	private String lastName;
 	private String username;
 	private String password;
@@ -17,8 +18,9 @@ public class User {
 	
 	//constructor to fill info for user
 	public User(String firstName, String lastName, String username, String password, String street, String state,
-			String country, String email, String securityQ, String securityA, String ssn) {
+			String country, String email, String securityQ, String securityA, String ssn, String midName) {
 		this.firstName = firstName;
+		this.midName=midName;
 		this.lastName = lastName;
 		this.username = username;
 		this.password = password;
@@ -37,6 +39,12 @@ public class User {
 	}
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
+	}
+	public String getMidName() {
+		return midName;
+	}
+	public void setMidName(String midName) {
+		this.midName = midName;
 	}
 	public String getLastName() {
 		return lastName;
@@ -118,7 +126,7 @@ public class User {
 	// override to string to display customer info 
 	@Override
 	public String toString() {
-		return ("Name:"+ this.getFirstName() +" "+ this.getLastName() + "\n Username:" + this.getUsername());
+		return ("Name:"+ this.getFirstName() +" "+ this.getMidName() +" "+ this.getLastName() + "\n Username:" + this.getUsername());
 	}
 	
 	
