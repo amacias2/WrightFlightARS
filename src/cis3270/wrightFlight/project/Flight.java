@@ -2,7 +2,7 @@ package cis3270.wrightFlight.project;
 
 public class Flight {
 	private int flightID;
-	private int flightNum;
+	private String flightNum;
 	private StringBuilder departureDate;
 	private StringBuilder departureTime;
 	private StringBuilder arrivalTime;
@@ -18,10 +18,10 @@ public class Flight {
 	public void setFlightID(int flightID) {
 		this.flightID = flightID;
 	}
-	public int getFlightNum() {
+	public String getFlightNum() {
 		return flightNum;
 	}
-	public void setFlightNum(int flightNum) {
+	public void setFlightNum(String flightNum) {
 		this.flightNum = flightNum;
 	}
 	public StringBuilder getDepartureDate() {
