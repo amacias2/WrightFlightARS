@@ -1,0 +1,79 @@
+/*SQL Table Creation Statements*/
+
+USE WrightFlights;
+
+CREATE TABLE Customer(
+	cSSN varchar(11) primary key, 
+    CUsername varchar(20) NOT NULL,
+    CPassword varchar(18) NOT NULL, 
+    FirstName varchar(15) NOT NULL,
+    MidName  varchar(15) NULL,
+    LastName  varchar(15) NOT NULL, 
+    StreetAddress varchar(20) NOT NULL,
+    ZipCode numeric(6) NOT NULL,
+    State varchar(10) NOT NULL,
+    Country varchar(15) NOT NULL,
+    Email varchar(30) NOT NULL,
+    SecurityQuestion varchar(50) NOT NULL,
+    SecurityAnswer varchar(20) NOT NULL
+);
+CREATE TABLE Admin(
+	AdminSSN varchar(11) primary key, 
+    UserName varchar(20) NOT NULL,
+    APassword varchar(18) NOT NULL, 
+    FirstName varchar(15) NOT NULL,
+    MidName  varchar(15) NULL,
+    LastName  varchar(15) NOT NULL, 
+    StreetAddress varchar(20) NOT NULL,
+    ZipCode numeric(6) NOT NULL,
+    State varchar(10) NOT NULL,
+    Country varchar(15) NOT NULL,
+    Email varchar(30) NOT NULL,
+    SecurityQuestion varchar(50) NOT NULL,
+    SecurityAnswer varchar(20) NOT NULL
+);
+CREATE TABLE Flight(
+	flightID numeric(10) primary key, 
+    flightNum varchar(10) NOT NULL,
+    fDate varchar(20) NOT NULL,
+    BoardingTime varchar(8) NOT NULL,
+    DepartureTime varchar(8) NOT NULL,
+    ArrivalTime varchar(8) NOT NULL, 
+    FlightDuration varchar(8) NOT NULL, 
+    DestinationAirport varchar(15) NOT NULL, 
+    AirlineName varchar(10) NOT NULL, 
+    Capacity numeric(3) NOT NULL,
+    BookedNum numeric(6) NOT NULL
+);
+CREATE TABLE Booking(
+	ConfirmationNum numeric(12) primary key, 
+    timeBooked varchar(8) NOT NULL,
+    BStatus varchar(10) NOT NULL,
+    seatAssignment varchar(5) NOT NULL,
+    cSSN varchar(11) NOT NULL,
+    flightID numeric(10) NOT NULL,
+    CONSTRAINT Booking_Customer_fk FOREIGN KEY(cSSN)
+		REFERENCES Customer(cSSN)
+        ON DELETE RESTRICT
+        ON UPDATE CASCADE,
+	CONSTRAINT Booking_Flight_fk FOREIGN KEY(flightID)
+		REFERENCES Flight(flightID)
+        ON DELETE RESTRICT
+        ON UPDATE CASCADE
+);
+CREATE TABLE FlightChange(
+	FlightChangeID numeric(5) primary key, 
+    FCDATE varchar(20) NOT NULL,
+    FCTime varchar(8) NOT NULL,
+    ChangeType varchar(12) NOT NULL, 
+    AdminSSN varchar(11) NOT NULL, 
+    FlightID numeric(10) NOT NULL, 
+    CONSTRAINT FlightChange_Admin_fk FOREIGN KEY(AdminSSN)
+		REFERENCES Admin(AdminSSN)
+        ON DELETE RESTRICT
+        ON UPDATE CASCADE,
+	CONSTRAINT FlightChange_Flight_fk FOREIGN KEY(flightID)
+		REFERENCES Flight(flightID)
+        ON DELETE RESTRICT
+        ON UPDATE CASCADE
+);
