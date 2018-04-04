@@ -17,6 +17,7 @@ CREATE TABLE Customer(
     SecurityQuestion varchar(50) NOT NULL,
     SecurityAnswer varchar(20) NOT NULL
 );
+
 CREATE TABLE Admin(
 	AdminSSN varchar(11) primary key, 
     UserName varchar(20) NOT NULL,
@@ -32,6 +33,7 @@ CREATE TABLE Admin(
     SecurityQuestion varchar(50) NOT NULL,
     SecurityAnswer varchar(20) NOT NULL
 );
+
 CREATE TABLE Flight(
 	flightID numeric(10) primary key, 
     flightNum varchar(10) NOT NULL,
@@ -45,6 +47,7 @@ CREATE TABLE Flight(
     Capacity numeric(3) NOT NULL,
     BookedNum numeric(6) NOT NULL
 );
+
 CREATE TABLE Booking(
 	ConfirmationNum numeric(12) primary key, 
     timeBooked varchar(8) NOT NULL,
@@ -61,6 +64,7 @@ CREATE TABLE Booking(
         ON DELETE RESTRICT
         ON UPDATE CASCADE
 );
+
 CREATE TABLE FlightChange(
 	FlightChangeID numeric(5) primary key, 
     FCDATE varchar(20) NOT NULL,
