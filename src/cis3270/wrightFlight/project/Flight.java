@@ -12,6 +12,8 @@ public class Flight {
 	private String airlineName;
 	private int capacity;
 	private int numBooked;
+	private double flight_price; 
+	
 	public int getFlightID() {
 		return flightID;
 	}
@@ -90,6 +92,12 @@ public class Flight {
 		
 		return false;
 		
+	}
+	public double getFlight_price() {
+		return flight_price;
+	}
+	public void setFlight_price(double flight_price) {
+		this.flight_price = flight_price;
 	}
 	
 }
