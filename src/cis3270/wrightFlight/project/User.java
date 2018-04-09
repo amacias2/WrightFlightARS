@@ -129,5 +129,9 @@ public class User {
 		return ("Name:"+ this.getFirstName() +" "+ this.getMidName() +" "+ this.getLastName() + "\n Username:" + this.getUsername());
 	}
 	
+	public void createBooking(Flight flightID) {
+		new Booking(flightID);
+	}
+	
 	
 }
