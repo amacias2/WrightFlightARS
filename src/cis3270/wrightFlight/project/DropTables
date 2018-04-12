@@ -1,6 +1,6 @@
 USE WrightFlights;
-drop table Admin;
 drop table Booking;
 drop table Customer;
-drop table Flight;
 drop table FlightChange;
+drop table Flight;
+drop table Admin;
