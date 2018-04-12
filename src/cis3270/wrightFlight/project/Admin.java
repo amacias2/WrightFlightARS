@@ -18,5 +18,7 @@ public class Admin extends User {
 				input.next(), input.nextInt(), input.nextInt(), input.nextDouble()).toString();
 
 	}
+	
+	
 
 }

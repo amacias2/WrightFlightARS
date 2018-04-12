@@ -1,6 +1,7 @@
 package cis3270.wrightFlight.project;
 
 import java.util.Date;
+import javafx.application.Application;
 
 public class Booking {
 	
