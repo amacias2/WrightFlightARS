@@ -1,5 +1,7 @@
 package cis3270.wrightFlight.project;
 
+import cis3270.wrightFlight.project.Flight;
+
 public class User {
 
 
@@ -129,8 +131,15 @@ public class User {
 		return ("Name:"+ this.getFirstName() +" "+ this.getMidName() +" "+ this.getLastName() + "\n Username:" + this.getUsername());
 	}
 	
-	public void createBooking(Flight flightID) {
-		new Booking(flightID);
+	public void searchFlight() {
+		
+	}
+	
+	public Flight selectFlight() {
+		return new Flight();
+	}
+	public void createBooking() {
+		new Booking( this.selectFlight(), this.getSsn() );
 	}
 	
 	

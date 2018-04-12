@@ -1,18 +1,39 @@
 package cis3270.wrightFlight.project;
 
 public class Flight {
-	private int flightID;
+	private  static int flightID=0;
 	private String flightNum;
-	private StringBuilder departureDate;
-	private StringBuilder departureTime;
-	private StringBuilder arrivalTime;
-	private StringBuilder flightDuration;
+	private StringBuilder departureDate=new StringBuilder();
+	private StringBuilder departureTime=new StringBuilder();
+	private StringBuilder arrivalTime=new StringBuilder();
+	private StringBuilder flightDuration=new StringBuilder();
 	private String to;
 	private String from;
 	private String airlineName;
 	private int capacity;
 	private int numBooked;
 	private double flight_price; 
+	
+	public Flight() {
+		new Flight(flightNum,departureDate, departureTime, arrivalTime, flightDuration, to, from, airlineName, capacity, numBooked, flight_price);
+	}
+	public Flight(String flightNum, StringBuilder departureDate, StringBuilder departureTime, StringBuilder arrivalTime, StringBuilder flightDuration, String to, String from, String airlineName, int capacity, int numBooked, double flight_price) {
+		this.flightID=++flightID;
+		this.flightNum = flightNum;
+		this.departureDate= departureDate;
+		this.departureTime= departureTime;
+		this.arrivalTime= arrivalTime;
+		this.flightDuration= flightDuration;
+		this.capacity= capacity;
+		this.numBooked= numBooked;
+		this.airlineName=airlineName;
+		this.to = to;
+		this.from= from;
+		this.flight_price= flight_price;
+		
+	}
+	
+	
 	
 	public int getFlightID() {
 		return flightID;
@@ -82,6 +103,7 @@ public class Flight {
 	}
 	
 	public String toString() {
+		System.out.println(flightID +"");
 		return  flightID +"";
 	}
 	

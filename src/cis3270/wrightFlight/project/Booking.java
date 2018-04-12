@@ -9,12 +9,15 @@ public class Booking {
 	private String status;
 	private String seatAssignment;
 	private double bookedPrice;
+	private String ssn;
 	
-	public Booking(Flight flightID) {
+	
+	public Booking(Flight flightID, String ssn) {
 		this.confirmationNum=confirmationNum++;
 		this.timeBooked= new Date().getTime();
 		this.status= "Booked";
 		this.bookedPrice= flightID.getFlight_price();
+		this.ssn= ssn;
 	}
 	
 	public int getConfirmationNum() {
