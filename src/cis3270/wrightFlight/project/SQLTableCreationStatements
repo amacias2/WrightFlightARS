@@ -1,7 +1,4 @@
-/*SQL Table Creation Statements*/
-
 USE WrightFlights;
-
 CREATE TABLE Customer(
 	cSSN varchar(11) primary key, 
     CUsername varchar(20) NOT NULL,
@@ -17,7 +14,6 @@ CREATE TABLE Customer(
     SecurityQuestion varchar(50) NOT NULL,
     SecurityAnswer varchar(20) NOT NULL
 );
-
 CREATE TABLE Admin(
 	AdminSSN varchar(11) primary key, 
     UserName varchar(20) NOT NULL,
@@ -33,7 +29,6 @@ CREATE TABLE Admin(
     SecurityQuestion varchar(50) NOT NULL,
     SecurityAnswer varchar(20) NOT NULL
 );
-
 CREATE TABLE Flight(
 	flightID numeric(10) primary key, 
     flightNum varchar(10) NOT NULL,
@@ -45,14 +40,15 @@ CREATE TABLE Flight(
     DestinationAirport varchar(15) NOT NULL, 
     AirlineName varchar(10) NOT NULL, 
     Capacity numeric(3) NOT NULL,
-    BookedNum numeric(6) NOT NULL
+    BookedNum numeric(6) NOT NULL,
+    Flight_Price numeric(10) NOT NULL
 );
-
 CREATE TABLE Booking(
 	ConfirmationNum numeric(12) primary key, 
     timeBooked varchar(8) NOT NULL,
     BStatus varchar(10) NOT NULL,
     seatAssignment varchar(5) NOT NULL,
+    Booked_Price numeric(10) NOT NULL,
     cSSN varchar(11) NOT NULL,
     flightID numeric(10) NOT NULL,
     CONSTRAINT Booking_Customer_fk FOREIGN KEY(cSSN)
@@ -64,7 +60,6 @@ CREATE TABLE Booking(
         ON DELETE RESTRICT
         ON UPDATE CASCADE
 );
-
 CREATE TABLE FlightChange(
 	FlightChangeID numeric(5) primary key, 
     FCDATE varchar(20) NOT NULL,
