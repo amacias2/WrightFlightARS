@@ -1,0 +1,53 @@
+USE WrightFlights;
+Insert into Admin(AdminSSN, UserName, APassword, FirstName, MidName, LastName, StreetAddress, ZipCode, State, Country, Email, SecurityQuestion, SecurityAnswer)
+Values('473-56-1234','Achaves1','Achaves123', 'Angela', 'Maria','Chaves','1234 Woodmont Lane', '30318','Georgia','United States','achaves1@something.com','What is your mothers maiden name?', 'Ortega');
+Insert into Admin(AdminSSN, UserName, APassword, FirstName, MidName, LastName, StreetAddress, ZipCode, State, Country, Email, SecurityQuestion, SecurityAnswer)
+Values('485-98-9832','Amacias2','Amacias123', 'Alondra', 'Laura','Macias','960 Haymon Drive', '30680','Georgia','United States','amacias2@something.com','What was your high school mascot?', 'Wildcat');
+Insert into Admin(AdminSSN, UserName, APassword, FirstName, MidName, LastName, StreetAddress, ZipCode, State, Country, Email, SecurityQuestion, SecurityAnswer)
+Values('567-89-1012','Aaria3','Aaria123', 'Andrea','' ,'Aria','589 Huckleberry', '30303','Georgia','United States','aaria3@something.com','What is your favorite brand?', 'Armani Exchange');
+
+Insert into Customer(cSSN, CUsername, CPassword, FirstName, MidName, LastName, StreetAddress, ZipCode, State, Country, Email, SecurityQuestion, SecurityAnswer)
+Values('231-34-9857','CPerez1','Cperez1234','Cristian', 'Daniel', 'Perez', '234 Water Lane', '50968', 'South Carolina','United States','Cperez1@someting.com', 'What is my dogs name?','Bacon');
+Insert into Customer(cSSN, CUsername, CPassword, FirstName, MidName, LastName, StreetAddress, ZipCode, State, Country, Email, SecurityQuestion, SecurityAnswer)
+Values('678-03-9021','ANohl','Anohl1234','Adam', '', 'Nohl', '15 South Street', '34590', 'Texas','United States','Anohl1@someting.com', 'Who is my favorite artist?','J. Cole');
+Insert into Customer(cSSN, CUsername, CPassword, FirstName, MidName, LastName, StreetAddress, ZipCode, State, Country, Email, SecurityQuestion, SecurityAnswer)
+Values('231-34-2637','AKim2','Akim1234','Alisa', 'Alyssa', 'Kim', '767 Habersham Rd', '98237', 'Indiana','United States','Akim2@someting.com', 'What city did I meet my husband?','Atlanta');
+Insert into Customer(cSSN, CUsername, CPassword, FirstName, MidName, LastName, StreetAddress, ZipCode, State, Country, Email, SecurityQuestion, SecurityAnswer)
+Values('231-34-8736','BRussell3','Brussell1234','Brian', 'Grant', 'Russell', '124 Harriet Lane', '50304', 'Wisconsin','United States','Brussell3@someting.com', 'What was the name of my first pet?','Nemo');
+Insert into Customer(cSSN, CUsername, CPassword, FirstName, MidName, LastName, StreetAddress, ZipCode, State, Country, Email, SecurityQuestion, SecurityAnswer)
+Values('123-56-6934','LDuong5','LDuong1234','Lillian', '', 'Duong', '89 Yarn St', '30303', 'Georgia','United States','Lduong5@someting.com', 'What is my favorite movie?','Coco');
+Insert into Customer(cSSN, CUsername, CPassword, FirstName, MidName, LastName, StreetAddress, ZipCode, State, Country, Email, SecurityQuestion, SecurityAnswer)
+Values('685-40-3829','HRuiz9','HRuiz1234','Henry', '', 'Ruiz', '983 Gilmer St', '40593', 'New York','United States','Hruiz9@someting.com', 'Who is my celebrity crush?','Matthew McConaughey');
+
+Insert into Flight(flightID, flightNum, fDate,fTo,fFrom, BoardingTime, DepartureTime, ArrivalTime, FlightDuration, DestinationAirport, AirlineName, Capacity, BookedNum, Flight_Price)
+Values('1','NK941','Fri, June 1, 2018','Tampa FL','Atlanta GA','5:00 PM','5:45 PM','7:13 PM','1:28','Tampa, Fl','Spirit','130','1','44');
+Insert into Flight(flightID, flightNum, fDate,fTo,fFrom, BoardingTime, DepartureTime, ArrivalTime, FlightDuration, DestinationAirport, AirlineName, Capacity, BookedNum, Flight_Price)
+Values('2','DL2940','Tue, June 5, 2018','New York NY','Atlanta GA','9:00 PM','9:41 PM','12:03 AM','2:22','New York JFK','Delta','150','2','164');
+Insert into Flight(flightID, flightNum, fDate,fTo,fFrom, BoardingTime, DepartureTime, ArrivalTime, FlightDuration, DestinationAirport, AirlineName, Capacity, BookedNum, Flight_Price)
+Values('3','F91567','Tue, May 15, 2018','Los Angeles CA','Atlanta GA','9:00 AM','9:49 AM','11:49 AM','5:00','Los Angeles, CA','Frontier','130','3','128');
+Insert into Flight(flightID, flightNum, fDate,fTo,fFrom, BoardingTime, DepartureTime, ArrivalTime, FlightDuration, DestinationAirport, AirlineName, Capacity, BookedNum, Flight_Price)
+Values('4','UA1947','Wed, May 23, 2018','Atlanta GA','Milwaukee WI','3:30 PM','4:05 PM','7:13 PM','2:08','Atlanta, GA','United Airlines','150','4','130');
+Insert into Flight(flightID, flightNum, fDate,fTo,fFrom, BoardingTime, DepartureTime, ArrivalTime, FlightDuration, DestinationAirport, AirlineName, Capacity, BookedNum, Flight_Price)
+Values('5','F93117','Tue, June 5, 2018','Chicago IL','Milwaukee WI','4:55 AM','5:25 AM','6:25 AM','1:00','Chicago, IL','Frontier','150','5','116');
+Insert into Flight(flightID, flightNum, fDate,fTo,fFrom, BoardingTime, DepartureTime, ArrivalTime, FlightDuration, DestinationAirport, AirlineName, Capacity, BookedNum, Flight_Price)
+Values('6','NK890','Fri, June 8, 2018','Las Vegas NV','Atlanta GA','3:00 PM','3:45 PM','7:13 PM','3:28','Las Vegas, NV','Spirit','130','6','155');
+
+Insert into Booking(ConfirmationNum, timeBooked, BStatus, seatAssignment, Booked_Price, cSSN, flightID)
+Values('12345','2:15 PM','Future','A 32','44','231-34-9857','1');
+Insert into Booking(ConfirmationNum, timeBooked, BStatus, seatAssignment, Booked_Price, cSSN, flightID)
+Values('54321','9:15 PM','Future','A 15','164','678-03-9021','2');
+Insert into Booking(ConfirmationNum, timeBooked, BStatus, seatAssignment, Booked_Price, cSSN, flightID)
+Values('34982','10:30 PM','Future','A 23','128','231-34-2637','3');
+Insert into Booking(ConfirmationNum, timeBooked, BStatus, seatAssignment, Booked_Price, cSSN, flightID)
+Values('34582','12:15 PM','Future','A 10','130','231-34-8736','4');
+Insert into Booking(ConfirmationNum, timeBooked, BStatus, seatAssignment, Booked_Price, cSSN, flightID)
+Values('29382','1:25 PM','Future','A 13','116','123-56-6934','5');
+Insert into Booking(ConfirmationNum, timeBooked, BStatus, seatAssignment, Booked_Price, cSSN, flightID)
+Values('98734','4:45 PM','Future','A 12','155','685-40-3829','6');
+
+Insert into FlightChange(FlightChangeID, FCDATE, FCTime, ChangeType, AdminSSN, FlightID)
+Values('4567','Fri, June 1, 2018','6:45 PM','Delayed','473-56-1234','1');
+Insert into FlightChange(FlightChangeID, FCDATE, FCTime, ChangeType, AdminSSN, FlightID)
+Values('2637','Wed, May 16, 2018','9:45 AM','Delayed','485-98-9832','3');
+Insert into FlightChange(FlightChangeID, FCDATE, FCTime, ChangeType, AdminSSN, FlightID)
+Values('0921','Sat, June 9, 2018','2:45 PM','Delayed','567-89-1012','6');
