@@ -8,11 +8,11 @@ CREATE TABLE Customer(
     LastName  varchar(15) NOT NULL, 
     StreetAddress varchar(20) NOT NULL,
     ZipCode numeric(6) NOT NULL,
-    State varchar(10) NOT NULL,
+    State varchar(20) NOT NULL,
     Country varchar(15) NOT NULL,
     Email varchar(30) NOT NULL,
-    SecurityQuestion varchar(50) NOT NULL,
-    SecurityAnswer varchar(20) NOT NULL
+    SecurityQuestion varchar(70) NOT NULL,
+    SecurityAnswer varchar(30) NOT NULL
 );
 CREATE TABLE Admin(
 	AdminSSN varchar(11) primary key, 
@@ -23,22 +23,24 @@ CREATE TABLE Admin(
     LastName  varchar(15) NOT NULL, 
     StreetAddress varchar(20) NOT NULL,
     ZipCode numeric(6) NOT NULL,
-    State varchar(10) NOT NULL,
+    State varchar(20) NOT NULL,
     Country varchar(15) NOT NULL,
     Email varchar(30) NOT NULL,
-    SecurityQuestion varchar(50) NOT NULL,
-    SecurityAnswer varchar(20) NOT NULL
+    SecurityQuestion varchar(70) NOT NULL,
+    SecurityAnswer varchar(30) NOT NULL
 );
 CREATE TABLE Flight(
 	flightID numeric(10) primary key, 
     flightNum varchar(10) NOT NULL,
     fDate varchar(20) NOT NULL,
+    fTo varchar(20) NOT NULl,
+    fFrom varchar(20) NOT NULL,
     BoardingTime varchar(8) NOT NULL,
     DepartureTime varchar(8) NOT NULL,
     ArrivalTime varchar(8) NOT NULL, 
     FlightDuration varchar(8) NOT NULL, 
     DestinationAirport varchar(15) NOT NULL, 
-    AirlineName varchar(10) NOT NULL, 
+    AirlineName varchar(15) NOT NULL, 
     Capacity numeric(3) NOT NULL,
     BookedNum numeric(6) NOT NULL,
     Flight_Price numeric(10) NOT NULL
