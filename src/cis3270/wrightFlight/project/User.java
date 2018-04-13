@@ -136,7 +136,7 @@ public class User {
 	}
 	
 	public Flight selectFlight() {
-		return new Flight();
+		return new Flight()3;
 	}
 	public void createBooking() {
 		new Booking( this.selectFlight(), this.getSsn() );
