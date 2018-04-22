@@ -1,7 +1,6 @@
 
 public class VO {
 
-	 static int confirmationNum;
 	 long timeBooked;
 	 String status;
 	 String seatAssignment;

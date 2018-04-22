@@ -1,6 +1,5 @@
 package cis3270.wrightFlight.project;
 import  cis3270.wrightFlight.ValueObject;
-import java.util.Scanner;
 
 public class Admin extends User {
 
@@ -11,8 +10,6 @@ public class Admin extends User {
 	}
 
 	public void createFlight(VO a) {
-		Scanner input = new Scanner(System.in);
-
 		new Flight(a.firstName, a.lastName, a.username, a.password, a.street, a.state, a.country, a.email, a.securityQ, a.securityA, a.ssn);
 
 	}
