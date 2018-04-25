@@ -1,39 +1,45 @@
 package BusinessLogic;
 
 import BusinessLogic.Flight;
-import ValueObject.VO;
-public class User {
+import Database.UserDB;
+
+public class User implements registerUser, Login {
 
 
-	private String firstName;
-	private String midName;
-	private String lastName;
-	private String username;
-	private String password;
-	private String street;
-	private String state;
-	private String country;
-	private String email;
-	private String securityQ;
-	private String securityA;
-	private String ssn;
+	protected String firstName;
+	protected String midName;
+	protected String lastName;
+	protected String username;
+	protected String password;
+	protected String street;
+	protected String state;
+	protected String country;
+	protected String email;
+	protected String securityQ;
+	protected String securityA;
+	protected String ssn;
+	protected String zipCode;
 	
 	//constructor to fill info for user
-	public User(VO a) {
-		this.firstName = a.getFirstName();
-		this.midName= a.getMidName();
-		this.lastName = a.getLastName();
-		this.username = a.getUsername();
-		this.password = a.getPassword();
-		this.street = a.getStreet();
-		this.state = a.getState();
-		this.country = a.getCountry();
-		this.email = a.getEmail();
-		this.securityQ = a.getSecurityQ();
-		this.securityA = a.getSecurityA();
-		this.ssn = a.getSsn();
+	public User(String firstName, String midName, String lastName, String username, String password, String street,
+			String state, String country, String email, String securityQ, String securityA, String ssn,
+			String zipCode) {
+		super();
+		this.firstName = firstName;
+		this.midName = midName;
+		this.lastName = lastName;
+		this.username = username;
+		this.password = password;
+		this.street = street;
+		this.state = state;
+		this.country = country;
+		this.email = email;
+		this.securityQ = securityQ;
+		this.securityA = securityA;
+		this.ssn = ssn;
+		this.zipCode = zipCode;
 	}
-	
+
 	// getters and setters for all attributes
 	public String getFirstName() {
 		return firstName;
@@ -109,42 +115,20 @@ public class User {
 	}
 	
 	//returns true if username and password passed is same as username and password of user
-	public boolean login(VO a) {
-		if(this.username.equals(a.username)&& this.password.equals(a.password)) {
-			return true;
+	public void login(String username, String password){
+		
+			try {
+				if(!password.equals(UserDB.getUserPW(username))) 
+				throw new Exception("Invalid password");
+			} catch (Exception e) {
+				//gui error dialog box 
+			}
 		}
-			return false;
 			
-		}
-	
-	public static void register(VO a) throws Exception{
-		
-		if(!a.getFirstName().matches("\\d*"|| !a.getLastName().matches("\\d*")||!a.getMidName().matches("\\d*")))
-			throw new Exception();
-		if(!a.email.matches("\\S+?\\w*?@\\D*.\\D{3}"))
-			throw new Exception();
-		
-		public User(VO a) {
-			this.firstName = a.firstName;
-			this.midName= a.midName;
-			this.lastName = a.lastName;
-			this.username = a.username;
-			this.password = a.password;
-			this.street = a.street;
-			this.state = a.state;
-			this.country = a.country;
-			this.email = a.email;
-			this.securityQ = a.securityQ;
-			this.securityA = a.securityA;
-			this.ssn = a.ssn;
-		}
-	}
 	
 	//displays password if string passed equals security answer
-	public void resetLogin(VO a) {
-		System.out.println(this.securityQ);
-		
-		if(this.securityA.equals(a.secuirtyA)) 
+	public void resetLogin(String securityA) {
+		if(this.securityA.equals(securityA))
 			System.out.println(this.getPassword());
 	}
 	
@@ -157,12 +141,14 @@ public class User {
 	public void searchFlight() {
 		
 	}
-	
-	public Flight selectFlight() {
-		return new Flight();
+
+
+	public String getZipCode() {
+		return zipCode;
 	}
-	public void createBooking() {
-		new Booking( this.selectFlight(), this.getSsn() );
+
+	public void setZipCode(String zipCode) {
+		this.zipCode = zipCode;
 	}
 	
 	
