@@ -1,4 +1,7 @@
 package GUI;
+import BusinessLogic.User;
+import BusinessLogic.Admin;
+import BusinessLogic.Login;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -48,13 +51,13 @@ public void start(Stage primaryStage) {
 	GridPane.setHalignment(login, HPos.LEFT);
 	GridPane.setHalignment(register, HPos.RIGHT);
 	
-	register.setOnAction(e ->{
-		//what needs to happen if they click on register
-		
-	});
+	register.setOnAction(e->{});
 	
-	login.setOnAction(a->{
-		//what needs to happen if they click on login 2
+	login.setOnAction(new EventHandler<ActionEvent>() {
+		
+		public void handle(ActionEvent event) {
+			User.login(username.getText(),password.getText());
+		}
 	});
 	
 	Scene scene=new Scene(grid, 300, 150);

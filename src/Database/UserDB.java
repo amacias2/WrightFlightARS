@@ -1,6 +1,8 @@
 package Database;
 
 import BusinessLogic.User;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -17,8 +19,6 @@ public class UserDB {
 		} catch (ClassNotFoundException e1) {
 			e1.printStackTrace();
 		}
-
-		System.out.println("Driver loaded");
 
 		// Connect
 		Connection connection;
@@ -81,20 +81,17 @@ public class UserDB {
 				// Execute Statement
 				ResultSet resultSet = statement.executeQuery(str);
 
-				return resultSet.toString();
-			}
+				System.out.println(resultSet.getString(1));
 
-			catch (Exception ex) {
+			} catch (Exception ex) {
+
 			} finally {
 				connection.close();
 			}
-		} catch (Exception ex) {
 
+		} catch (Exception e) {
 		}
 		return "No password found";
-
 	}
-
-
 
 }

@@ -115,7 +115,7 @@ public class User implements registerUser, Login {
 	}
 	
 	//returns true if username and password passed is same as username and password of user
-	public void login(String username, String password){
+	public static void login(String username, String password){
 		
 			try {
 				if(!password.equals(UserDB.getUserPW(username))) 
