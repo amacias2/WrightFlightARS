@@ -19,20 +19,19 @@ public class User {
 	private String ssn;
 	
 	//constructor to fill info for user
-	public User(String firstName, String lastName, String username, String password, String street, String state,
-			String country, String email, String securityQ, String securityA, String ssn, String midName) {
-		this.firstName = firstName;
-		this.midName=midName;
-		this.lastName = lastName;
-		this.username = username;
-		this.password = password;
-		this.street = street;
-		this.state = state;
-		this.country = country;
-		this.email = email;
-		this.securityQ = securityQ;
-		this.securityA = securityA;
-		this.ssn = ssn;
+	public User(VO a) {
+		this.firstName = a.firstName;
+		this.midName= a.midName;
+		this.lastName = a.lastName;
+		this.username = a.username;
+		this.password = a.password;
+		this.street = a.street;
+		this.state = a.state;
+		this.country = a.country;
+		this.email = a.email;
+		this.securityQ = a.securityQ;
+		this.securityA = a.securityA;
+		this.ssn = a.ssn;
 	}
 	
 	// getters and setters for all attributes
@@ -110,18 +109,42 @@ public class User {
 	}
 	
 	//returns true if username and password passed is same as username and password of user
-	public boolean login(String username, String password) {
-		if(this.username.equals(username)&& this.password.equals(password)) {
+	public boolean login(VO a) {
+		if(this.username.equals(a.username)&& this.password.equals(a.password)) {
 			return true;
 		}
 			return false;
 			
 		}
 	
-	//displays password if string passed equals security answer
-	public void resetLogin(String secuirtyA) {
+	public static void register(VO a) throws exception{
 		
-		if(this.securityA.equals(secuirtyA)) 
+		if(!a.firstName.matches("\\d*"|| !a.lastName.matches("\\d*")||!a.midName.matches("\\d*")))
+			throw new Exception();
+		if(!a.email.matches("\\S+?\\w*?@\\D*.\\D{3}"))
+			throw new Exception();
+		
+		public User(VO a) {
+			this.firstName = a.firstName;
+			this.midName= a.midName;
+			this.lastName = a.lastName;
+			this.username = a.username;
+			this.password = a.password;
+			this.street = a.street;
+			this.state = a.state;
+			this.country = a.country;
+			this.email = a.email;
+			this.securityQ = a.securityQ;
+			this.securityA = a.securityA;
+			this.ssn = a.ssn;
+		}
+	}
+	
+	//displays password if string passed equals security answer
+	public void resetLogin(VO a) {
+		System.out.println(this.securityQ);
+		
+		if(this.securityA.equals(a.secuirtyA)) 
 			System.out.println(this.getPassword());
 	}
 	
