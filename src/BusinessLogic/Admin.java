@@ -47,7 +47,8 @@ public class Admin extends User implements registerAdmin, Login {
 			this.adminAns = adminAns;
 		}
 
-		public void login(String username, String password) {
+		
+		public static void login(String username, String password) {
 				try {
 					if(!password.equals(AdminDB.getAdminPW(username))) 
 					throw new Exception("Invalid password");
