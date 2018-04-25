@@ -1,8 +1,10 @@
 package Database;
 
 import BusinessLogic.User;
+import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.stage.Stage;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -10,21 +12,24 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class UserDB {
+public class UserDB extends Application {
 
-	public static void addUser(User a) {
-
+	public static Connection getConnection() throws Exception{
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-		} catch (ClassNotFoundException e1) {
-			e1.printStackTrace();
+		Class.forName("com.mysql.jdbc.Driver");
+		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/WrightFlights?useSSL=false", "root",
+				"root");
+		return connection;
+		}catch(Exception e) {
+			e.printStackTrace();
 		}
+		return null;
+	}
+	public static void addUser(User a) throws Exception {
 
-		// Connect
-		Connection connection;
+		
 		try {
-			connection = DriverManager.getConnection("jdbc:mysql://localhost/WrightFlights?useSSL=false", "root",
-					"root");
+			Connection connection = getConnection();
 			try {
 				// select query to run
 				String str = "Insert into Customer Values('" + a.getSsn() + "','" + a.getUsername() + "','"
@@ -58,30 +63,23 @@ public class UserDB {
 
 	public static String getUserPW(String username) {
 
-		// Load driver
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-		System.out.println("Driver loaded");
-
-		try {
-			// Connect
-			Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/WrightFlights?useSSL=false",
-					"root", "root");
-			System.out.println("DBMS connected");
+			Connection connection = getConnection();
+			
 			try {
 				// select query to run
-				String str = "select cpassword from Customer" + "where cusername='" + username + "';";
+				String str = "select CPassword from Customer" + "where CUsername='"+ username+"';";
 
 				// Prepare Statement
 				Statement statement = connection.prepareStatement(str);
 
 				// Execute Statement
+				
 				ResultSet resultSet = statement.executeQuery(str);
-
-				System.out.println(resultSet.getString(1));
+				
+				while(resultSet.next()) {
+				return resultSet.getString(1);
+				}
 
 			} catch (Exception ex) {
 
@@ -92,6 +90,11 @@ public class UserDB {
 		} catch (Exception e) {
 		}
 		return "No password found";
+	}
+	@Override
+	public void start(Stage arg0) throws Exception {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

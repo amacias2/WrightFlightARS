@@ -115,13 +115,13 @@ public class User implements registerUser, Login {
 	}
 	
 	//returns true if username and password passed is same as username and password of user
-	public static void login(String username, String password){
+	public static void login(String password){
 		
 			try {
-				if(!password.equals(UserDB.getUserPW(username))) 
+				if(!password.equals(password)) 
 				throw new Exception("Invalid password");
 			} catch (Exception e) {
-				//gui error dialog box 
+				System.out.println("Invalid pw");
 			}
 		}
 			
