@@ -1,4 +1,4 @@
-package cis3270.wrightFlight.project;
+package BusinessLogic;
 
 public class Flight {
 	private  static int flightID=0;

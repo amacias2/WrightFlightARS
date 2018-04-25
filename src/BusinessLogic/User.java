@@ -1,7 +1,7 @@
-package cis3270.wrightFlight.project;
+package BusinessLogic;
 
-import cis3270.wrightFlight.project.Flight;
-
+import BusinessLogic.Flight;
+import ValueObject.VO;
 public class User {
 
 
@@ -20,18 +20,18 @@ public class User {
 	
 	//constructor to fill info for user
 	public User(VO a) {
-		this.firstName = a.firstName;
-		this.midName= a.midName;
-		this.lastName = a.lastName;
-		this.username = a.username;
-		this.password = a.password;
-		this.street = a.street;
-		this.state = a.state;
-		this.country = a.country;
-		this.email = a.email;
-		this.securityQ = a.securityQ;
-		this.securityA = a.securityA;
-		this.ssn = a.ssn;
+		this.firstName = a.getFirstName();
+		this.midName= a.getMidName();
+		this.lastName = a.getLastName();
+		this.username = a.getUsername();
+		this.password = a.getPassword();
+		this.street = a.getStreet();
+		this.state = a.getState();
+		this.country = a.getCountry();
+		this.email = a.getEmail();
+		this.securityQ = a.getSecurityQ();
+		this.securityA = a.getSecurityA();
+		this.ssn = a.getSsn();
 	}
 	
 	// getters and setters for all attributes
@@ -117,9 +117,9 @@ public class User {
 			
 		}
 	
-	public static void register(VO a) throws exception{
+	public static void register(VO a) throws Exception{
 		
-		if(!a.firstName.matches("\\d*"|| !a.lastName.matches("\\d*")||!a.midName.matches("\\d*")))
+		if(!a.getFirstName().matches("\\d*"|| !a.getLastName().matches("\\d*")||!a.getMidName().matches("\\d*")))
 			throw new Exception();
 		if(!a.email.matches("\\S+?\\w*?@\\D*.\\D{3}"))
 			throw new Exception();

@@ -1,5 +1,4 @@
-package cis3270.wrightFlight.project;
-
+package BusinessLogic;
 import java.util.Date;
 import javafx.application.Application;
 
