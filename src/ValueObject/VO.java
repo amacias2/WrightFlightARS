@@ -1,5 +1,7 @@
 package ValueObject;
-public class VO {
+import BusinessLogic.Admin;
+import BusinessLogic.User;
+public class VO implements register {
 //test to push 
 	 long timeBooked;
 	 String status;
@@ -22,12 +24,27 @@ public class VO {
 	 StringBuilder departureTime=new StringBuilder();
 	 StringBuilder arrivalTime=new StringBuilder();
 	 StringBuilder flightDuration=new StringBuilder();
+	 StringBuilder boardingTime= new StringBuilder();
 	 String to;
 	 String from;
 	 String airlineName;
+	 
+	 
+	 public StringBuilder getBoardingTime() {
+		return boardingTime;
+	}
+	public void setBoardingTime(StringBuilder boardingTime) {
+		this.boardingTime = boardingTime;
+	}
+	public void setFlightID(String flightID) {
+		this.flightID = flightID;
+	}
+	String zipCode;
+	 String flightID;
 	 int capacity;
 	 int numBooked;
 	 double flight_price;
+	 String adminAns=null;
 	public String getFirstName() {
 		return firstName;
 	}
@@ -189,7 +206,66 @@ public class VO {
 	}
 	public void setFlight_price(double flight_price) {
 		this.flight_price = flight_price;
+	}
+	public String getAdminAns() {
+		return adminAns;
+	}
+	public void setAdminAns(String adminAns) {
+		this.adminAns = adminAns;
 	} 
+	public String getZipCode() {
+		return zipCode;
+	}
+	public void setZipCode(String zipCode) {
+		this.zipCode = zipCode;
+	}
+	public String getFlightID() {
+	
+		return flightID;
+	}
+	
+	public void registerVO( VO a) {
+		//Check for valid name
+		try {
+		if(!a.getFirstName().matches("\\w*")|| !a.getLastName().matches("\\w*")||!a.getMidName().matches("\\w*"))
+			throw new Exception("Please enter a valid name.");
+		}catch(Exception e) {
+			//send to gui dialog box that prints exception message
+		}
+		//check for valid email
+		try {
+		if(!a.email.matches("\\S+?\\w*?@\\D*.\\D{3}"))
+			throw new Exception("Please enter a valid email.");
+		}catch(Exception e) {
+			//send to gui dialog box that prints exception message
+		}
+		//check for valid ssn
+		try {
+			if(!a.email.matches("\\d{3}\\-?\\d{2}\\-?\\d{4}"))
+				throw new Exception("Please enter a valid ssn.");
+			}catch(Exception e) {
+				//send to gui dialog box that prints exception message
+			}
+		try {
+		if(a.getAdminAns()==Admin.getAdminPW()) {
+			Admin.registerAdmin(a);
+			return;
+		}else if(a.getAdminAns() != null ) {
+			throw new Exception("Admin password is invalid.");
+		}}
+		catch(Exception e) {
+			//send to gui dialog box that prints exception message	
+			}
+		
+		User.registerUser(a);
+	
+	}
+	
+	public void authentication(VO a) {
+		
+	}
+	
+	
 	
 	
 }
