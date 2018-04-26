@@ -103,11 +103,11 @@ public class addFlight extends Application{
 		
 		gridPane.add(capacity, 4, 1);
 		gridPane.add(capacityText, 5, 1);
-		int cap=Integer.parseInt(capacityText.getText());
+		
 		
 		gridPane.add(BookedNum, 4, 2);
 		gridPane.add(BookedNumText, 5, 2);
-		int booked= Integer.parseInt(BookedNumText.getText());
+		
 		
 		gridPane.add(FlightPrice, 4, 3);
 		gridPane.add(FlightPriceText, 5, 3);
@@ -122,7 +122,7 @@ public class addFlight extends Application{
 		confirmAdd.setOnAction(b->{
 			try {
 			Flight flight1=new Flight(flightNumText.getText(),fDateText.getText(),DepartureTimeText.getText(),ArrivalTimeText.getText(),flightDurationText.getText(),
-					fToText.getText(),fFromText.getText(),AirlineNameText.getText(),cap,booked,DestinationAirportText.getText(),FlightPriceText.getText(),BoardingTimeText.getText());
+					fToText.getText(),fFromText.getText(),AirlineNameText.getText(),Integer.parseInt(capacityText.getText()),Integer.parseInt(BookedNumText.getText()),DestinationAirportText.getText(),FlightPriceText.getText(),BoardingTimeText.getText());
 					AdminDB.addFlight(flight1);
 			}catch(Exception e){
 				AlertMessage.display("Error", "Add flight error. Please make sure all fields are correct.");
@@ -142,7 +142,5 @@ public class addFlight extends Application{
 		return connection;
 	}
 
-	public static void main(String[] args) {
-		launch(args);
-	}
+	
 }
