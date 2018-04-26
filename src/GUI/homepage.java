@@ -122,7 +122,8 @@ public void start(Stage primaryStage) {
 						
 							System.out.println("Valid pw");
 							else
-							System.out.println("Inalid pw");}
+								
+							AlertMessage.display("Incorrect Login", "Username or password is incorrect. Please try again");}
 					 connection.close();
 					} catch (Exception ex) {
 
