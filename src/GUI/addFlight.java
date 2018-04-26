@@ -59,6 +59,9 @@ public class addFlight extends Application{
 		Text FlightPrice = new Text("Flight Price: ");
 		TextField FlightPriceText = new TextField();
 		
+		Text FlightID = new Text("Flight ID: ");
+		TextField FlightIDText = new TextField();
+		
 		Button confirmAdd= new Button("Confirm add");
 		
 		GridPane gridPane = new GridPane();
@@ -112,7 +115,10 @@ public class addFlight extends Application{
 		gridPane.add(FlightPrice, 4, 3);
 		gridPane.add(FlightPriceText, 5, 3);
 		
-		gridPane.add(confirmAdd, 5, 4);
+		gridPane.add(FlightID, 4, 4);
+		gridPane.add(FlightIDText, 5, 4);
+		
+		gridPane.add(confirmAdd, 6, 5);
 		gridPane.setStyle("-fx-background-color: SALMON;");
 		Scene scene = new Scene(gridPane);
 		Addstage.setTitle("Adding a new flight");
@@ -122,7 +128,7 @@ public class addFlight extends Application{
 		confirmAdd.setOnAction(b->{
 			try {
 			Flight flight1=new Flight(flightNumText.getText(),fDateText.getText(),DepartureTimeText.getText(),ArrivalTimeText.getText(),flightDurationText.getText(),
-					fToText.getText(),fFromText.getText(),AirlineNameText.getText(),Integer.parseInt(capacityText.getText()),Integer.parseInt(BookedNumText.getText()),DestinationAirportText.getText(),FlightPriceText.getText(),BoardingTimeText.getText());
+					fToText.getText(),fFromText.getText(),AirlineNameText.getText(),Integer.parseInt(capacityText.getText()),Integer.parseInt(BookedNumText.getText()),DestinationAirportText.getText(),FlightPriceText.getText(),BoardingTimeText.getText(),FlightIDText.getText());
 					AdminDB.addFlight(flight1);
 			}catch(Exception e){
 				AlertMessage.display("Error", "Add flight error. Please make sure all fields are correct.");
