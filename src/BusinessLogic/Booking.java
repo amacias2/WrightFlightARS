@@ -1,16 +1,17 @@
 package BusinessLogic;
 import java.util.Date;
 import BusinessLogic.Flight;
+import Database.CustomerDB;
+import GUI.homepage;
 import javafx.application.Application;
 
 public class Booking extends Flight {
 	
-	private static int confirmationNum;
+	private static int confirmationNum=0000;
 	private long timeBooked;
 	private String status;
-	private String seatAssignment;
 	private String bookedPrice;
-	private String ssn;
+	private String ssn=CustomerDB.getUserSSN(homepage.getUsr());;
 	
 	
 	
@@ -18,11 +19,21 @@ public class Booking extends Flight {
 	
 	
 	
+	public String getSsn() {
+		return ssn;
+	}
+
+	public void setSsn(String ssn) {
+		this.ssn = ssn;
+	}
+
+	public Booking() {}
+	
 	public Booking(String flightNum, String departureDate, String departureTime, String arrivalTime,
 			String flightDuration, String to, String from, String airlineName, int capacity, int numBooked,
-			String destinationAirport, String flight_price, String boardingTime) {
+			String destinationAirport, String flight_price, String boardingTime, String flightID) {
 		super(flightNum, departureDate, departureTime, arrivalTime, flightDuration, to, from, airlineName, capacity, numBooked,
-				destinationAirport, flight_price, boardingTime);
+				destinationAirport, flight_price, boardingTime, flightID);
 		this.confirmationNum=confirmationNum++;
 		this.timeBooked= new Date().getTime();
 		this.status= "Booked";
@@ -46,12 +57,6 @@ public class Booking extends Flight {
 	}
 	public void setStatus(String status) {
 		this.status = status;
-	}
-	public String getSeatAssignment() {
-		return seatAssignment;
-	}
-	public void setSeatAssignment(String seatAssignment) {
-		this.seatAssignment = seatAssignment;
 	}
 	public String getBookedPrice() {
 		return bookedPrice;

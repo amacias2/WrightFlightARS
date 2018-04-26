@@ -135,6 +135,7 @@ public class Register extends Application {
 		Registrationstage.show();
 
 		buttonRegisterUser.setOnAction(a -> {
+			if(ssnText.getText().matches("\\d{3}-\\d{2}-\\d{4}")) {
 			try {
 				Customer customer = new Customer(fnameText.getText(), mnameText.getText(), lnameText.getText(),
 						usernameText.getText(), passwordText.getText(), addressText.getText(), stateText.getText(),
@@ -146,7 +147,9 @@ public class Register extends Application {
 
 			}
 			Registrationstage.close();
-		});
+		}else{
+			AlertMessage.display("SSN Error", "SSN Error. Please make sure SSN is in valid format (XXX-XX-XXXX) and try again");
+		}});
 
 		buttonRegisterAdmin.setOnAction(a -> {
 			

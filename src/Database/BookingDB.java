@@ -6,18 +6,26 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.time.LocalTime;
 
+import BusinessLogic.Booking;
+import BusinessLogic.Flight;
+import GUI.SearchFlights;
 import GUI.homepage;
 
 public class BookingDB {
 
-	public static boolean checkDoubleBooked(String flightID,String username) {
+	public static boolean checkDoubleBooked() {
 		try {
 			Connection connection = getConnection();
 			
 			try {
 				String Cssn= CustomerDB.getUserSSN(homepage.getUsr());
+				String flightID=SearchFlights.getBookFlightID();
+				
+				System.out.println(Cssn +" "+ flightID);
 				// select query to run
-				String str="SELECT flightID, cSSN FROM booking where cSSN="+Cssn+"';";
+				
+				String str="SELECT flightID, cSSN FROM booking where cSSN='"+Cssn+ "'AND flightID='"+flightID+"';";
+				
 				
 
 				// Prepare Statement
@@ -26,6 +34,7 @@ public class BookingDB {
 				// Execute Statement
 				
 				ResultSet resultSet = statement.executeQuery(str);
+				
 				if(!resultSet.next()) {
 					return false;
 				}else
@@ -78,6 +87,61 @@ public class BookingDB {
 		}
 		return false;
 	}
+	
+	
+	public static Booking createBooking() {
+		try {
+			Connection connection = getConnection();
+			
+			try {
+				
+				String flightID=SearchFlights.getBookFlightID();
+				// select query to run
+				
+				String str2="SELECT * FROM flight where flightID='"+flightID+"';";
+				
+
+				// Prepare Statement
+				
+				Statement statement2 = connection.prepareStatement(str2);
+
+				// Execute Statement
+				
+				
+				ResultSet resultSet2 = statement2.executeQuery(str2);
+				while(resultSet2.next()) {
+				return new Booking(resultSet2.getString("flightNum"),resultSet2.getString("DepartureDate"),resultSet2.getString("DepartureTime"),resultSet2.getString("ArrivalTime"),resultSet2.getString("FlightDuration"),resultSet2.getString("fTo"),resultSet2.getString("fFrom"),resultSet2.getString("AirlineName"),resultSet2.getInt("capacity"),resultSet2.getInt("BookedNum"),resultSet2.getString("DestinationAirport"),resultSet2.getString("Flight_Price"),resultSet2.getString("BoardingTime"),resultSet2.getString("flightID"));		
+
+			}} catch (Exception ex) {
+
+			} finally {
+				connection.close();
+			}
+
+		} catch (Exception e) {
+		}
+	
+		return new Booking();
+	}
+	
+	public static void addBooking(Booking a) {
+			try {
+				Connection connection = getConnection();
+				// select query to run
+				String str = "Insert into Booking Values('" + a.getConfirmationNum() + "','" + a.getTimeBooked() + "','"
+						+ a.getStatus() + "','" + a.getBookedPrice() + "', '" + a.getSsn() + "', '" + a.getFlightID()+"');";
+
+				// Prepare Statement
+				Statement statement = connection.prepareStatement(str);
+
+				// Execute Statement
+				statement.executeUpdate(str);
+				connection.close();
+			} catch (Exception ex) {
+				// send to gui error dialog box
+			}
+		}
+
 	
 	
 	

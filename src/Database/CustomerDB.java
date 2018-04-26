@@ -159,7 +159,6 @@ public class CustomerDB  {
 					ResultSet resultSet = statement.executeQuery();
 				
 					while(resultSet.next()) {
-					
 						return resultSet.getString(1);
 							}
 						
