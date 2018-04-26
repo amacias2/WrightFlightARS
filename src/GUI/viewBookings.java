@@ -4,12 +4,17 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import BusinessLogic.Flight;
+import Database.AdminDB;
+import Database.BookingDB;
 import Database.CustomerDB;
+import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -19,18 +24,30 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-public class viewBookings {
+public class viewBookings extends Application implements EventHandler<ActionEvent>{
+	
+	
 	public void start(Stage primaryStage) throws Exception {
+
+		primaryStage.setTitle("View Booked Flights");
 		AnchorPane anchor = new AnchorPane();
 		anchor.setPadding(new Insets(20, 20, 20, 20));
 		TableView<Flight> table = new TableView<>();
 		final ObservableList<Flight> data = FXCollections.observableArrayList();
+
 		
 		Button userView = new Button("Main page");
 		userView.setOnAction(a -> {
-			primaryStage.close();
-			AdminMain main= new AdminMain();
-			main.start(new Stage());
+			if (AdminDB.isAdmin(homepage.getUsr())) {
+				primaryStage.close();
+				AdminMain main = new AdminMain();
+				main.start(new Stage());
+			} else {
+				primaryStage.close();
+				CustomerMain cmain = new CustomerMain();
+				cmain.start(new Stage());
+
+			}
 		});
 		
 		TableColumn<Flight, String> column1 = new TableColumn<Flight, String>("Flight#");
@@ -81,48 +98,59 @@ public class viewBookings {
 		searchB.setLayoutX(1050);
 		searchB.setLayoutY(60.0);
 		searchB.setMinWidth(100);
-		
+
 		searchB.setOnAction(s -> {
-			try {
-				
-			Connection connection = getConnection();
 			
+					try {
+						Connection connection = getConnection();
+					String str = "SELECT * FROM Booking WHERE Cssn = '" + CustomerDB.getUserSSN(homepage.getUsr()) + "';";
+					PreparedStatement statement = connection.prepareStatement(str);
 
-			String str = "SELECT * FROM Booking WHERE Cssn='"+CustomerDB.getUserSSN(homepage.getUsr())+"';"; 
-			PreparedStatement statement = connection.prepareStatement(str);
+					ResultSet myResult = statement.executeQuery();
+					table.getItems().clear();
 
-			ResultSet myResult = statement.executeQuery();
-			table.getItems().clear();
+					if (!myResult.next()) {
+						AlertMessage.display("No Flights Found",
+								"No flights were found");
+					}
+					while (myResult.next()) {
+						data.add(new Flight(myResult.getString("flightNum"), myResult.getString("fDate"),
+								myResult.getString("DepartureTime"), myResult.getString("ArrivalTime"),
+								myResult.getString("FlightDuration"), myResult.getString("fTo"),
+								myResult.getString("fFrom"), myResult.getString("AirlineName"),
+								myResult.getInt("capacity"), myResult.getInt("BookedNum"),
+								myResult.getString("DestinationAirport"), myResult.getString("Flight_Price"),
+								myResult.getString("BoardingTime"), myResult.getString(1)));
+						table.setItems(data);
+					}
+					statement.close();
+					myResult.close();
+					connection.close();
+					
 
-			if (!myResult.next()) {
-				AlertMessage.display("No Flights Found",
-						"No flights were found matching your criteria. Please try again. "
-								+ "\nFormat for searches-\nTo/From: City STATE ex. Atlanta GA\nDate:MM-DD-YYYY\nTime: HH:MM ex. 17:45");
-			}
-			while (myResult.next()) {
-				data.add(new Flight(myResult.getString("flightNum"), myResult.getString("fDate"),
-						myResult.getString("DepartureTime"), myResult.getString("ArrivalTime"),
-						myResult.getString("FlightDuration"), myResult.getString("fTo"),
-						myResult.getString("fFrom"), myResult.getString("AirlineName"), myResult.getInt("capacity"),
-						myResult.getInt("BookedNum"), myResult.getString("DestinationAirport"),
-						myResult.getString("Flight_Price"), myResult.getString("BoardingTime"),myResult.getString(1)));
-				table.setItems(data);
-			}
-			statement.close();
-			myResult.close();
-			connection.close();
-			} catch (Exception a) {
+				} catch (SQLException a) {
+					System.out.println(a.getMessage());
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}finally {
+					
+					} 
 				
-			}
-				});
-		
+			});
+
 		table.setLayoutX(20);
 		table.setLayoutY(100);
 		table.setMinWidth(1020);
 		table.getColumns().addAll(column1, column2, column3, column4, column5, column6, column7, column8, column9,
-				column10, column11, column12, column13,column14);
+				column10, column11, column12, column13, column14);
 		anchor.getChildren().addAll( searchB, table, userView);
 		Scene scene = new Scene(anchor, 1600, 900);
+
+		
+
+		primaryStage.setScene(scene);
+		primaryStage.show();
 	}
 		public static Connection getConnection() throws Exception{
 			try {
@@ -134,6 +162,11 @@ public class viewBookings {
 				e.printStackTrace();
 			}
 			return null;
+		}
+		@Override
+		public void handle(ActionEvent event) {
+			// TODO Auto-generated method stub
+			
 		}
 		
 		

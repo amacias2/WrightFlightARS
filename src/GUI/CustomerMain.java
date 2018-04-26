@@ -18,15 +18,17 @@ public class CustomerMain extends Application{
 public void start(Stage primaryStage) {
 	primaryStage.setTitle("Welcome User");
 	
-	Button searchFlights=new Button("Search Flights");
-	Button viewBookings=new Button("View Booked Flights");
-	Button logout= new Button("Log out");
-	Button removeFlight= new Button("Remove Flight");
+
 	
 	GridPane grid= new GridPane();
 	grid.setHgap(5);
 	grid.setVgap(5);
 	grid.setPadding(new Insets(20,20,20,20));
+	
+	Button searchFlights=new Button("Search Flights");
+	Button viewBookings=new Button("View Booked Flights");
+	Button logout= new Button("Log out");
+	Button removeFlight= new Button("Remove Flight");
 	
 	grid.add(searchFlights, 0, 0);
 	grid.add(logout, 0, 3);
