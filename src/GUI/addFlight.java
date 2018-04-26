@@ -1,8 +1,10 @@
 package GUI;
-import Database.AdminDB;
+
+import Database.FlightDB;
 import BusinessLogic.Flight;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import GUI.AdminMain;
 
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -13,6 +15,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+
 
 public class addFlight extends Application{
 	@Override
@@ -29,7 +32,7 @@ public class addFlight extends Application{
 		Text fTo = new Text("To: ");
 		TextField fToText = new TextField();
 		
-		Text fFrom = new Text("Flight ID: ");
+		Text fFrom = new Text("From: ");
 		TextField fFromText = new TextField();
 		
 		Text BoardingTime = new Text("Boarding Time: ");
@@ -52,15 +55,11 @@ public class addFlight extends Application{
 		
 		Text capacity = new Text("Capacity: ");
 		TextField capacityText = new TextField();
-		
-		Text BookedNum = new Text("Booked Number: ");
-		TextField BookedNumText = new TextField();
+	
 		
 		Text FlightPrice = new Text("Flight Price: ");
 		TextField FlightPriceText = new TextField();
 		
-		Text FlightID = new Text("Flight ID: ");
-		TextField FlightIDText = new TextField();
 		
 		Button confirmAdd= new Button("Confirm add");
 		
@@ -108,15 +107,10 @@ public class addFlight extends Application{
 		gridPane.add(capacityText, 5, 1);
 		
 		
-		gridPane.add(BookedNum, 4, 2);
-		gridPane.add(BookedNumText, 5, 2);
 		
+		gridPane.add(FlightPrice, 4, 2);
+		gridPane.add(FlightPriceText, 5, 2);
 		
-		gridPane.add(FlightPrice, 4, 3);
-		gridPane.add(FlightPriceText, 5, 3);
-		
-		gridPane.add(FlightID, 4, 4);
-		gridPane.add(FlightIDText, 5, 4);
 		
 		gridPane.add(confirmAdd, 6, 5);
 		gridPane.setStyle("-fx-background-color: SALMON;");
@@ -126,15 +120,22 @@ public class addFlight extends Application{
 		Addstage.show();
 		
 		confirmAdd.setOnAction(b->{
+			
+			
 			try {
 			Flight flight1=new Flight(flightNumText.getText(),fDateText.getText(),DepartureTimeText.getText(),ArrivalTimeText.getText(),flightDurationText.getText(),
-					fToText.getText(),fFromText.getText(),AirlineNameText.getText(),Integer.parseInt(capacityText.getText()),Integer.parseInt(BookedNumText.getText()),DestinationAirportText.getText(),FlightPriceText.getText(),BoardingTimeText.getText(),FlightIDText.getText());
-					AdminDB.addFlight(flight1);
+					fToText.getText(),fFromText.getText(),AirlineNameText.getText(),Integer.parseInt(capacityText.getText()),0,DestinationAirportText.getText(),FlightPriceText.getText(),BoardingTimeText.getText(),flightIDText.getText());
+					FlightDB.addFlight(flight1);
+					Addstage.close();
+					
+					AdminMain main= new AdminMain();
+					main.start(new Stage());
+
 			}catch(Exception e){
 				AlertMessage.display("Error", "Add flight error. Please make sure all fields are correct.");
-			}
 			
-		});
+			
+		}});
 	}
 	public static Connection getConnection() {
 		Connection connection = null;

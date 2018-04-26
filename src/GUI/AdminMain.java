@@ -44,6 +44,21 @@ public void start(Stage primaryStage) {
 	primaryStage.setScene(scene);
 	primaryStage.show();
 	
+	updateFlight.setOnAction(f->{
+		updateFlight main= new updateFlight();
+		main.start(primaryStage);
+	});
+	removeFlight.setOnAction(f->{
+		
+		try {
+			removeFlight main= new removeFlight();
+			main.start(primaryStage);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+	});
 	addFlight.setOnAction(a->{
 		try {
 			addFlight flight= new addFlight();

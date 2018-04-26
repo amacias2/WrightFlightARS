@@ -20,6 +20,7 @@ public void start(Stage primaryStage) {
 	Button searchFlights=new Button("Search Flights");
 	Button viewBookedFlights= new Button("View Booked Flights");
 	Button logout= new Button("Log out");
+	Button removeFlight= new Button("Remove Flight");
 	
 	GridPane grid= new GridPane();
 	grid.setHgap(5);
@@ -28,7 +29,8 @@ public void start(Stage primaryStage) {
 	
 	grid.add(searchFlights, 0, 0);
 	grid.add(viewBookedFlights, 0, 1);
-	grid.add(logout, 0, 2);
+	grid.add(logout, 0, 3);
+	grid.add(removeFlight, 0, 2);
 	
 	grid.setAlignment(Pos.CENTER);
 	grid.setStyle("-fx-background-color: LAVENDER;");
@@ -38,6 +40,23 @@ public void start(Stage primaryStage) {
 	primaryStage.setScene(scene);
 	primaryStage.show();
 	
+	removeFlight.setOnAction(f->{
+		try {
+		UserRemoveFlight main=new UserRemoveFlight();
+		main.start(primaryStage);
+		}catch(Exception e) {
+			
+		}});
+	
+	
+	viewBookedFlights.setOnAction(f->{
+		try {
+			viewBookedFlights main= new viewBookedFlights();
+			main.start(primaryStage);
+		}catch(Exception e) {
+			
+		}
+	});
 	searchFlights.setOnAction(a->{
 		try {
 			SearchFlights sf=new SearchFlights();

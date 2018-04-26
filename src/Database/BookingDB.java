@@ -50,6 +50,44 @@ public class BookingDB {
 		}
 		return true;
 	}
+	public static boolean checkCapacity() {
+		try {
+			Connection connection = getConnection();
+			
+			try {
+				;
+				String flightID=SearchFlights.getBookFlightID();
+				
+				// select query to run
+				
+				String str="SELECT Capacity, BookedNum FROM booking where  flightID='"+flightID+"';";
+				
+				
+
+				// Prepare Statement
+				Statement statement = connection.prepareStatement(str);
+
+				// Execute Statement
+				
+				ResultSet resultSet = statement.executeQuery(str);
+				
+				if(Integer.parseInt(resultSet.getString("Capacity"))>Integer.parseInt(resultSet.getString("BookedNum"))) {
+					return false;
+				}else
+					return true;
+
+			} catch (Exception ex) {
+
+			} finally {
+				connection.close();
+			}
+
+		} catch (Exception e) {
+		}
+		return true;
+	}
+	
+	
 	
 	public static boolean checkConflict(String flightID,String username) {
 		try {

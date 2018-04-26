@@ -35,7 +35,7 @@ import javafx.stage.Stage;
 
 public class SearchFlights extends Application implements EventHandler<ActionEvent> {
 	private static String bookFlightID = "";
-	
+	static String dbSearch = "";
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 
@@ -51,30 +51,29 @@ public class SearchFlights extends Application implements EventHandler<ActionEve
 		dropdown.setLayoutY(60);
 		dropdown.setLayoutX(720);
 
-		
 		Button userView = new Button("Main page");
 		userView.setOnAction(a -> {
-			if(AdminDB.isAdmin(homepage.getUsr())) {
-				AdminMain main= new AdminMain();
-				main.start(new Stage());}
-			else {
-				CustomerMain cmain=new CustomerMain();
+			if (AdminDB.isAdmin(homepage.getUsr())) {
+				AdminMain main = new AdminMain();
+				main.start(new Stage());
+			} else {
+				CustomerMain cmain = new CustomerMain();
 				cmain.start(new Stage());
-			
-		}});
-		
-		
+
+			}
+		});
+
 		TextField flightIDText = new TextField();
 		flightIDText.setPromptText("Flight ID");
 		flightIDText.setLayoutX(800);
 		flightIDText.setLayoutY(600);
 		flightIDText.setMinWidth(250);
-		
+
 		Button bkFlight = new Button("Book Flight");
 		bkFlight.setLayoutX(1050);
 		bkFlight.setLayoutY(600);
 		bkFlight.setMinWidth(250);
-		
+
 		TextField search = new TextField();
 		search.setLayoutX(800);
 		search.setLayoutY(60.0);
@@ -123,20 +122,18 @@ public class SearchFlights extends Application implements EventHandler<ActionEve
 		TableColumn<Flight, String> column14 = new TableColumn<Flight, String>("FlightID");
 		column14.setCellValueFactory(new PropertyValueFactory<>("flightID"));
 		column14.setMinWidth(80);
-		
+
 		Button searchB = new Button("Search Flights");
 		searchB.setLayoutX(1050);
 		searchB.setLayoutY(60.0);
 		searchB.setMinWidth(100);
-		
-
 
 		searchB.setOnAction(s -> {
 			try {
-				String dbSearch = getChoice(dropdown).trim();
-
+			
+				SearchFlights.getChoice(dropdown);
 				String searchItem = search.getText().trim().toUpperCase();
-				
+
 				if (dbSearch == "fDate" && !searchItem.matches("\\d{2}-\\d{2}-\\d{4}")) {
 					AlertMessage.display("Search Error", "Please insert date as MM-DD-YYYY and try again.");
 				}
@@ -144,74 +141,76 @@ public class SearchFlights extends Application implements EventHandler<ActionEve
 					AlertMessage.display("Search Error",
 							"Please insert time as HH:MM (23:59 = 11:59 PM) and try again.");
 				}
- 
+
 				
-				Connection connection = getConnection();
+					Connection connection = getConnection();
 
-				String str = "SELECT * FROM Flight WHERE " + dbSearch + "= '" + searchItem + "';";
-				PreparedStatement statement = connection.prepareStatement(str);
+					String str = "SELECT * FROM Flight WHERE " + dbSearch + " = '" + searchItem + "';";
+					PreparedStatement statement = connection.prepareStatement(str);
 
-				ResultSet myResult = statement.executeQuery();
-				table.getItems().clear();
+					ResultSet myResult = statement.executeQuery();
+					table.getItems().clear();
 
-				if (!myResult.next()) {
-					AlertMessage.display("No Flights Found",
-							"No flights were found matching your criteria. Please try again. "
-									+ "\nFormat for searches-\nTo/From: City STATE ex. Atlanta GA\nDate:MM-DD-YYYY\nTime: HH:MM ex. 17:45");
+					if (!myResult.next()) {
+						AlertMessage.display("No Flights Found",
+								"No flights were found matching your criteria. Please try again. "
+										+ "\nFormat for searches-\nTo/From: City STATE ex. Atlanta GA\nDate:MM-DD-YYYY\nTime: HH:MM ex. 17:45");
+					}
+					while (myResult.next()) {
+						data.add(new Flight(myResult.getString("flightNum"), myResult.getString("fDate"),
+								myResult.getString("DepartureTime"), myResult.getString("ArrivalTime"),
+								myResult.getString("FlightDuration"), myResult.getString("fTo"),
+								myResult.getString("fFrom"), myResult.getString("AirlineName"),
+								myResult.getInt("capacity"), myResult.getInt("BookedNum"),
+								myResult.getString("DestinationAirport"), myResult.getString("Flight_Price"),
+								myResult.getString("BoardingTime"), myResult.getString(1)));
+						table.setItems(data);
+					}
+
+					statement.close();
+					myResult.close();
+					connection.close();
+
+				} catch (SQLException a) {
+					System.out.println(a.getMessage());
 				}
-				while (myResult.next()) {
-					data.add(new Flight(myResult.getString("flightNum"), myResult.getString("fDate"),
-							myResult.getString("DepartureTime"), myResult.getString("ArrivalTime"),
-							myResult.getString("FlightDuration"), myResult.getString("fTo"),
-							myResult.getString("fFrom"), myResult.getString("AirlineName"), myResult.getInt("capacity"),
-							myResult.getInt("BookedNum"), myResult.getString("DestinationAirport"),
-							myResult.getString("Flight_Price"), myResult.getString("BoardingTime"),myResult.getString(1)));
-					table.setItems(data);
-				}
-
-				statement.close();
-				myResult.close();
-				connection.close();
-
-			} catch (SQLException a) {
-				System.out.println(a.getMessage());
-			}
+			
 		});
-		
+
 		table.setLayoutX(20);
 		table.setLayoutY(100);
 		table.setMinWidth(1020);
 		table.getColumns().addAll(column1, column2, column3, column4, column5, column6, column7, column8, column9,
-				column10, column11, column12, column13,column14);
-		anchor.getChildren().addAll(dropdown, search, searchB, table, userView,bkFlight,flightIDText);
+				column10, column11, column12, column13, column14);
+		anchor.getChildren().addAll(dropdown, search, searchB, table, userView, bkFlight, flightIDText);
 		Scene scene = new Scene(anchor, 1600, 900);
 
-		
-		
 		bkFlight.setOnAction(f -> {
 			setBookFlightID(flightIDText.getText());
-			if(BookingDB.checkConflict(getBookFlightID(), homepage.getUsr())) {
+			if (BookingDB.checkConflict(getBookFlightID(), homepage.getUsr()) && BookingDB.checkCapacity()) {
 				AlertMessage.display("Flight Conflict",
 						"WARNING!!! The FlightID entered creates a conflict with a previously booked flight!");
 				primaryStage.close();
-				BookFlight main2= new BookFlight();
+				BookFlight main2 = new BookFlight();
 				main2.start(new Stage());
-			}else if(!BookingDB.checkConflict(getBookFlightID(), homepage.getUsr())&& !BookingDB.checkDoubleBooked()){
+			} else if (!BookingDB.checkConflict(getBookFlightID(), homepage.getUsr()) && !BookingDB.checkDoubleBooked()
+					&& !BookingDB.checkCapacity()) {
 				primaryStage.close();
-				BookFlight main2= new BookFlight();
+				BookFlight main2 = new BookFlight();
 				main2.start(new Stage());
-				
-			}else if(BookingDB.checkConflict(getBookFlightID(), homepage.getUsr())&& BookingDB.checkDoubleBooked()){
+
+			} else if (BookingDB.checkConflict(getBookFlightID(), homepage.getUsr()) && BookingDB.checkDoubleBooked()) {
 				AlertMessage.display("Flight Conflict",
 						"The FlightID entered creates a conflict with a previously booked flight & has already been booked.");
-			}else if(BookingDB.checkDoubleBooked()) {
+			} else if (BookingDB.checkDoubleBooked()) {
+				AlertMessage.display("Flight Conflict", "The FlightID entered has already been booked.");
+			} else if (BookingDB.checkCapacity()) {
 				AlertMessage.display("Flight Conflict",
-						"The FlightID entered has already been booked.");
+						"Sorry!! The FlightID entered is over capacity. Please choose another flight.");
 			}
-			
-		
+
 		});
-		
+
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}
@@ -221,24 +220,22 @@ public class SearchFlights extends Application implements EventHandler<ActionEve
 	}
 
 	// test
-	public String getChoice(ChoiceBox<String>dropdown) {
-		String dbSearch="";
-		String choice= dropdown.getValue();
-		if(choice.equals("To")) {
-			dbSearch="fTo";
-		}else if(choice.equals("From")) {
-			dbSearch="fFrom";
-		}else if(choice.equals("Date")) {
-			dbSearch="fDate";
-		}else if(choice.equals("Time")) {
-			dbSearch="DepartureTime";
-		}else if(choice.equals("Airline")) {
-			dbSearch="AirlineName";
+	public static void getChoice(ChoiceBox<String> dropdown) {
+		String choice = ((String)dropdown.getValue());
+		if (choice.equals("To")) {
+			dbSearch = "fTo";
+		} else if (choice.equals("From")) {
+			dbSearch = "fFrom";
+		} else if (choice.equals("Date")) {
+			dbSearch = "fDate";
+		} else if (choice.equals("Time")) {
+			dbSearch = "DepartureTime";
+		} else if (choice.equals("Airline")) {
+			dbSearch = "AirlineName";
 		}
-		return dbSearch;
-		}
+		
+	}
 
-	
 	public static Connection getConnection() {
 		Connection connection = null;
 		try {

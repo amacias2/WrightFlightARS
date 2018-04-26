@@ -29,7 +29,7 @@ public class AdminDB {
 					"root");
 			try {
 				// select query to run
-				String str = "Insert into Flight Values('" + a.getUsername() + "','" + a.getPassword() + "','"
+				String str = "Insert into Admin Values('" + a.getUsername() + "','" + a.getPassword() + "','"
 						+ a.getFirstName() + "','" + a.getMidName() + "', '" + a.getLastName() + "', '" + a.getStreet()
 						+ "', '" + a.getZipCode() + "', '" + a.getState() + "', '" + a.getCountry() + "','"
 						+ a.getEmail() + "','" + a.getSecurityQ() + "', '" + a.getSecurityA() + "');";
@@ -178,47 +178,7 @@ public class AdminDB {
 		}
 		return true;
 	}
-	public static void addFlight(Flight f) {
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-		} catch (ClassNotFoundException e1) {
-			e1.printStackTrace();
-		}
-
-		System.out.println("Driver loaded");
-
-		// Connect
-		Connection connection;
-		try {
-			connection = DriverManager.getConnection("jdbc:mysql://localhost/WrightFlights?useSSL=false", "root",
-					"root");
-			try {
-				// select query to run
-				String string = "Insert into Flight Values('" + f.getFlightNum() + "','" + f.getDepartureDate() + "','"
-						+ f.getDepartureTime() + "','" + f.getArrivalTime() + "', '" + f.getFlightDuration() + "', '" + f.getTo()
-						+ "', '" + f.getAirlineName() + "', '" + f.getCapacity() + "', '" + f.getNumBooked() + "','"
-						+ f.getDestinationAirport() + "','" + f.getFlight_price() + "', '" + f.getBoardingTime() + "');";
-
-				// Prepare Statement
-				Statement statement = connection.prepareStatement(string);
-
-				// Execute Statement
-				statement.executeUpdate(string);
-
-			} finally {
-				try {
-					connection.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-
-			}
-		} catch (SQLException e) {
-
-			e.printStackTrace();
-
-		}
-	}
+	
 
 	
 	
