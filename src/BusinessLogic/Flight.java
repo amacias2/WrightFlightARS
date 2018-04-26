@@ -4,10 +4,10 @@ package BusinessLogic;
 public class Flight {
 	protected static String flightID;
 	private String flightNum;
-	private StringBuilder departureDate = new StringBuilder();
-	private StringBuilder departureTime = new StringBuilder();
-	private StringBuilder arrivalTime = new StringBuilder();
-	private StringBuilder flightDuration = new StringBuilder();
+	private String departureDate;
+	private String departureTime;
+	private String arrivalTime;
+	private String flightDuration;
 	private String to;
 	private String from;
 	private String airlineName;
@@ -15,13 +15,13 @@ public class Flight {
 	private int numBooked;
 	private String destinationAirport;
 	private String flight_price;
-	private StringBuilder boardingTime = new StringBuilder();
+	private String boardingTime;
 
 	
 
-	public Flight(String flightNum, StringBuilder departureDate, StringBuilder departureTime, StringBuilder arrivalTime,
-			StringBuilder flightDuration, String to, String from, String airlineName, int capacity, int numBooked,
-			String destinationAirport, String flight_price, StringBuilder boardingTime) {
+	public Flight(String flightNum, String departureDate, String departureTime, String arrivalTime,
+			String flightDuration, String to, String from, String airlineName, int capacity, int numBooked,
+			String destinationAirport, String flight_price, String boardingTime) {
 		
 		this.flightNum = flightNum;
 		this.departureDate = departureDate;
@@ -46,11 +46,11 @@ public class Flight {
 		this.destinationAirport = destinationAirport;
 	}
 
-	public StringBuilder getBoardingTime() {
+	public String getBoardingTime() {
 		return boardingTime;
 	}
 
-	public void setBoardingTime(StringBuilder boardingTime) {
+	public void setBoardingTime(String boardingTime) {
 		this.boardingTime = boardingTime;
 	}
 
@@ -70,35 +70,35 @@ public class Flight {
 		this.flightNum = flightNum;
 	}
 
-	public StringBuilder getDepartureDate() {
+	public String getDepartureDate() {
 		return departureDate;
 	}
 
-	public void setDepartureDate(StringBuilder departureDate) {
+	public void setDepartureDate(String departureDate) {
 		this.departureDate = departureDate;
 	}
 
-	public StringBuilder getDepartureTime() {
+	public String getDepartureTime() {
 		return departureTime;
 	}
 
-	public void setDepartureTime(StringBuilder departureTime) {
+	public void setDepartureTime(String departureTime) {
 		this.departureTime = departureTime;
 	}
 
-	public StringBuilder getArrivalTime() {
+	public String getArrivalTime() {
 		return arrivalTime;
 	}
 
-	public void setArrivalTime(StringBuilder arrivalTime) {
+	public void setArrivalTime(String arrivalTime) {
 		this.arrivalTime = arrivalTime;
 	}
 
-	public StringBuilder getFlightDuration() {
+	public String getFlightDuration() {
 		return flightDuration;
 	}
 
-	public void setFlightDuration(StringBuilder flightDuration) {
+	public void setFlightDuration(String flightDuration) {
 		this.flightDuration = flightDuration;
 	}
 

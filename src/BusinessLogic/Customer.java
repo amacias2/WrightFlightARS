@@ -9,7 +9,7 @@ public class Customer implements User {
 	protected String firstName;
 	protected String midName;
 	protected String lastName;
-	protected String username;
+	protected static String username;
 	protected String password;
 	protected String street;
 	protected String state;
@@ -61,7 +61,7 @@ public class Customer implements User {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	public  String getUsername() {
+	public static String getUsername() {
 		return username;
 	}
 	public void setUsername(String username) {

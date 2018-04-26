@@ -26,7 +26,7 @@ public class AlertMessage {
 		layout.getChildren().addAll(txt,b1);
 		layout.setAlignment(Pos.CENTER);
 		
-		Scene scene= new Scene(layout,500,100);
+		Scene scene= new Scene(layout,600,125);
 		window.setScene(scene);
 		window.showAndWait();	
 	}

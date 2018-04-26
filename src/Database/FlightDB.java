@@ -2,7 +2,6 @@ package Database;
 import BusinessLogic.Flight;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -49,6 +48,7 @@ public class FlightDB {
 
 		e.printStackTrace();
 	}
+<<<<<<< HEAD
 	}
 	public static void searchflight(String toText,String toState, String fromText, String fromState, String month, String day, String year,String time,String am_pm ) {
 	
@@ -98,5 +98,7 @@ public class FlightDB {
 		}
 		
 	}
+=======
+>>>>>>> parent of 111e841... Search FLights
 
 }
