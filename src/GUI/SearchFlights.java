@@ -162,6 +162,7 @@ public void start(Stage primaryStage) throws Exception{
 public void handle(ActionEvent arg0) {
 	
 }
+//test
 public String getChoice(ChoiceBox<String>dropdown) {
 	String dbSearch="";
 	String choice= dropdown.getValue();
