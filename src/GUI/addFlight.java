@@ -1,5 +1,5 @@
 package GUI;
-
+import Database.AdminDB;
 import BusinessLogic.Flight;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -103,15 +103,17 @@ public class addFlight extends Application{
 		
 		gridPane.add(capacity, 4, 1);
 		gridPane.add(capacityText, 5, 1);
+		int cap=Integer.parseInt(capacityText.getText());
 		
 		gridPane.add(BookedNum, 4, 2);
 		gridPane.add(BookedNumText, 5, 2);
+		int booked= Integer.parseInt(BookedNumText.getText());
 		
 		gridPane.add(FlightPrice, 4, 3);
 		gridPane.add(FlightPriceText, 5, 3);
 		
 		gridPane.add(confirmAdd, 5, 4);
-		gridPane.setStyle("-fx-background-color: GREY;");
+		gridPane.setStyle("-fx-background-color: SALMON;");
 		Scene scene = new Scene(gridPane);
 		Addstage.setTitle("Adding a new flight");
 		Addstage.setScene(scene);
@@ -119,11 +121,10 @@ public class addFlight extends Application{
 		
 		confirmAdd.setOnAction(b->{
 			try {
-			/*	Flight flight1=new Flight(flightIDText.getText(),flightNumText.getText(),fDateText.getText(),
-						fToText.getText(),fFromText.getText(),BoardingTimeText.getText(),DepartureTimeText.getText(),
-						ArrivalTimeText.getText(),flightDurationText.getText(),DestinationAirportText.getText(),AirlineNameText.getText(),
-						Integer.parseInt(capacityText.getText()),Integer.parseInt(BookedNumText.getText()),FlightPriceText.getText());
-			*/}catch(Exception e){
+			Flight flight1=new Flight(flightNumText.getText(),fDateText.getText(),DepartureTimeText.getText(),ArrivalTimeText.getText(),flightDurationText.getText(),
+					fToText.getText(),fFromText.getText(),AirlineNameText.getText(),cap,booked,DestinationAirportText.getText(),FlightPriceText.getText(),BoardingTimeText.getText());
+					AdminDB.addFlight(flight1);
+			}catch(Exception e){
 				AlertMessage.display("Error", "Add flight error. Please make sure all fields are correct.");
 			}
 			

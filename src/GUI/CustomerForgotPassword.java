@@ -26,10 +26,12 @@ public class CustomerForgotPassword {
 		Label LUsername= new Label("Username");
 		TextField username= new TextField();
 		Button enter1= new Button("Enter");
+		Button main= new Button("Return to login");
 		
 		grid.add(LUsername, 0, 0);
 		grid.add(username, 1, 0);
 		grid.add(enter1, 1, 1);
+		grid.add(main, 2, 2);
 		GridPane.setHalignment(enter1, HPos.CENTER);
 		
 		enter1.setOnAction(a->{
@@ -58,15 +60,17 @@ public class CustomerForgotPassword {
 			});
 		});
 		
+		main.setOnAction(c->{
+			try {
+				homepage hp1=new homepage();
+				hp1.start(new Stage());
+			}finally {
+				primaryStage.close();
+			}
+		});
 
 		
-		
 		grid.setAlignment(Pos.CENTER);
-		
-		
-		
-	
-		
 		
 		Scene scene=new Scene(grid, 700, 300);
 		primaryStage.setTitle("Customer Password Recovery");

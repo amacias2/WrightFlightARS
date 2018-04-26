@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import BusinessLogic.Admin;
+import BusinessLogic.Flight;
 
 public class AdminDB {
 	public static void addAdmin(Admin a) {
@@ -176,6 +177,47 @@ public class AdminDB {
 		} catch (Exception e) {
 		}
 		return true;
+	}
+	public static void addFlight(Flight f) {
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e1) {
+			e1.printStackTrace();
+		}
+
+		System.out.println("Driver loaded");
+
+		// Connect
+		Connection connection;
+		try {
+			connection = DriverManager.getConnection("jdbc:mysql://localhost/WrightFlights?useSSL=false", "root",
+					"root");
+			try {
+				// select query to run
+				String string = "Insert into Flight Values('" + f.getFlightNum() + "','" + f.getDepartureDate() + "','"
+						+ f.getDepartureTime() + "','" + f.getArrivalTime() + "', '" + f.getFlightDuration() + "', '" + f.getTo()
+						+ "', '" + f.getAirlineName() + "', '" + f.getCapacity() + "', '" + f.getNumBooked() + "','"
+						+ f.getDestinationAirport() + "','" + f.getFlight_price() + "', '" + f.getBoardingTime() + "');";
+
+				// Prepare Statement
+				Statement statement = connection.prepareStatement(string);
+
+				// Execute Statement
+				statement.executeUpdate(string);
+
+			} finally {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+
+			}
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+
+		}
 	}
 
 	

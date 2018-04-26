@@ -18,6 +18,7 @@ public void start(Stage primaryStage) {
 	primaryStage.setTitle("Welcome User");
 	
 	Button searchFlights=new Button("Search Flights");
+	Button viewBookedFlights= new Button("View Booked Flights");
 	Button logout= new Button("Log out");
 	
 	GridPane grid= new GridPane();
@@ -26,7 +27,8 @@ public void start(Stage primaryStage) {
 	grid.setPadding(new Insets(20,20,20,20));
 	
 	grid.add(searchFlights, 0, 0);
-	grid.add(logout, 4, 4);
+	grid.add(viewBookedFlights, 0, 1);
+	grid.add(logout, 0, 2);
 	
 	grid.setAlignment(Pos.CENTER);
 	grid.setStyle("-fx-background-color: LAVENDER;");

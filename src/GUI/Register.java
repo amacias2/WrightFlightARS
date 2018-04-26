@@ -2,12 +2,10 @@ package GUI;
 
 import BusinessLogic.Admin;
 import BusinessLogic.Customer;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -75,6 +73,7 @@ public class Register extends Application {
 
 		Button buttonRegisterUser = new Button("Customer Registration");
 		Button buttonRegisterAdmin = new Button("Admin Registration");
+		Button backtomain=new Button("Back to login");
 
 		GridPane gridPane = new GridPane();
 		gridPane.setMinSize(500, 500);
@@ -124,11 +123,12 @@ public class Register extends Application {
 
 		gridPane.add(buttonRegisterAdmin, 3, 3);
 		gridPane.add(buttonRegisterUser, 2, 3);
+		gridPane.add(backtomain, 3, 4);
 		
 		gridPane.add(AdminPWLabel, 3, 4);
 		gridPane.add(AdminPWText, 3, 5);
 		gridPane.add(enter, 3, 6);
-		gridPane.setStyle("-fx-background-color: YELLOW;");
+		gridPane.setStyle("-fx-background-color: LAVENDER;");
 		Scene scene = new Scene(gridPane);
 		Registrationstage.setTitle("Registration Form");
 		Registrationstage.setScene(scene);
@@ -175,6 +175,14 @@ public class Register extends Application {
 
 			} else {
 				AlertMessage.display("Authentication Failure", "Please verify admin password needed to register as a new admin and try again");
+			}
+		});
+		backtomain.setOnAction(b->{
+			try {
+				homepage h=new homepage();
+				h.start(new Stage());
+			}finally {
+				Registrationstage.close();
 			}
 		});
 		

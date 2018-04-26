@@ -16,6 +16,7 @@ public class AdminForgotPassword {
 	
 	public void start(Stage primaryStage) {
 		primaryStage.setTitle("WrightFlights ARS Main Menu");
+		Button main=new Button("Return to login");
 		
 		GridPane grid= new GridPane();
 		grid.setHgap(5);
@@ -29,6 +30,7 @@ public class AdminForgotPassword {
 		grid.add(LUsername, 0, 0);
 		grid.add(username, 1, 0);
 		grid.add(enter1, 1, 1);
+		grid.add(main, 1,2);
 		GridPane.setHalignment(enter1, HPos.CENTER);
 		
 		enter1.setOnAction(a->{
@@ -55,6 +57,16 @@ public class AdminForgotPassword {
 				
 				
 			});
+
+		});
+		
+		main.setOnAction(c->{
+			try {
+				homepage hp1=new homepage();
+				hp1.start(new Stage());
+			}finally {
+				primaryStage.close();
+			}
 		});
 		
 
