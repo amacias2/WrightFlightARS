@@ -2,7 +2,7 @@ package BusinessLogic;
 
 
 public class Flight {
-	protected static String flightID;
+	protected String flightID;
 	private String flightNum;
 	private String departureDate;
 	private String departureTime;
@@ -21,8 +21,9 @@ public class Flight {
 
 	public Flight(String flightNum, String departureDate, String departureTime, String arrivalTime,
 			String flightDuration, String to, String from, String airlineName, int capacity, int numBooked,
-			String destinationAirport, String flight_price, String boardingTime) {
+			String destinationAirport, String flight_price, String boardingTime,String flightID) {
 		
+		this.flightID=flightID;
 		this.flightNum = flightNum;
 		this.departureDate = departureDate;
 		this.departureTime = departureTime;
