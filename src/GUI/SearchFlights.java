@@ -50,7 +50,25 @@ public class SearchFlights extends Application implements EventHandler<ActionEve
 		dropdown.setValue("To");
 		dropdown.setLayoutY(60);
 		dropdown.setLayoutX(720);
+		
 
+		Button searchB = new Button("Search Flights");
+		searchB.setLayoutX(1050);
+		searchB.setLayoutY(60.0);
+		searchB.setMinWidth(250);
+		
+		Label flightIDLabel = new Label("FLight ID:");
+		TextField flightIDText = new TextField();
+		flightIDText.setLayoutX(300);
+		flightIDText.setLayoutY(30);
+		flightIDText.setMinWidth(250);
+		
+		Button bkFlight = new Button("Book Flight");
+		bkFlight.setLayoutX(600);
+		bkFlight.setLayoutY(100);
+		bkFlight.setMinWidth(250);
+		
+		
 		Button userView = new Button("Main page");
 		userView.setOnAction(a -> {
 			if(AdminDB.isAdmin(homepage.getUsr())) {
@@ -110,10 +128,7 @@ public class SearchFlights extends Application implements EventHandler<ActionEve
 
 		table.setTableMenuButtonVisible(false);
 
-		Button searchB = new Button("Search Flights");
-		searchB.setLayoutX(1050);
-		searchB.setLayoutY(60.0);
-		searchB.setMinWidth(100);
+		
 
 		searchB.setOnAction(s -> {
 			try {
@@ -160,19 +175,8 @@ public class SearchFlights extends Application implements EventHandler<ActionEve
 			}
 		});
 
-		table.setLayoutX(20);
-		table.setLayoutY(100);
-		table.setMinWidth(1000);
-		table.getColumns().addAll(column1, column2, column3, column4, column5, column6, column7, column8, column9,
-				column10, column11, column12, column13);
-		anchor.getChildren().addAll(dropdown, search, searchB, table, userView);
-		Scene scene = new Scene(anchor, 1300, 700);
-
-		TextField flightIDText = new TextField();
-		flightIDText.setPromptText("Flight ID");
-		Button bkFlight = new Button("Book Flight");
 		bookFlightID = flightIDText.getText();
-
+		
 		bkFlight.setOnAction(f -> {
 			if(BookingDB.checkConflict(bookFlightID, homepage.getUsr())) {
 				AlertMessage.display("Flight Conflict",
@@ -195,6 +199,14 @@ public class SearchFlights extends Application implements EventHandler<ActionEve
 			
 		
 		});
+		
+		table.setLayoutX(20);
+		table.setLayoutY(100);
+		table.setMinWidth(1000);
+		table.getColumns().addAll(column1, column2, column3, column4, column5, column6, column7, column8, column9,
+				column10, column11, column12, column13);
+		anchor.getChildren().addAll(dropdown, search, searchB, table, userView);
+		Scene scene = new Scene(anchor, 1300, 700);
 
 		primaryStage.setScene(scene);
 		primaryStage.show();
