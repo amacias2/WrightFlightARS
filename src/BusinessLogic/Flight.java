@@ -17,7 +17,7 @@ public class Flight {
 	private String flight_price;
 	private String boardingTime;
 
-	
+	public Flight() {}
 
 	public Flight(String flightNum, String departureDate, String departureTime, String arrivalTime,
 			String flightDuration, String to, String from, String airlineName, int capacity, int numBooked,

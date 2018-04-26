@@ -186,24 +186,25 @@ public class SearchFlights extends Application implements EventHandler<ActionEve
 		anchor.getChildren().addAll(dropdown, search, searchB, table, userView,bkFlight,flightIDText);
 		Scene scene = new Scene(anchor, 1600, 900);
 
-		bookFlightID = flightIDText.getText();
+		
 		
 		bkFlight.setOnAction(f -> {
-			if(BookingDB.checkConflict(bookFlightID, homepage.getUsr())) {
+			setBookFlightID(flightIDText.getText());
+			if(BookingDB.checkConflict(getBookFlightID(), homepage.getUsr())) {
 				AlertMessage.display("Flight Conflict",
 						"WARNING!!! The FlightID entered creates a conflict with a previously booked flight!");
 				primaryStage.close();
 				BookFlight main2= new BookFlight();
 				main2.start(new Stage());
-			}else if(!BookingDB.checkConflict(bookFlightID, homepage.getUsr())&& !BookingDB.checkDoubleBooked(bookFlightID, homepage.getUsr())){
+			}else if(!BookingDB.checkConflict(getBookFlightID(), homepage.getUsr())&& !BookingDB.checkDoubleBooked()){
 				primaryStage.close();
 				BookFlight main2= new BookFlight();
 				main2.start(new Stage());
 				
-			}else if(BookingDB.checkConflict(bookFlightID, homepage.getUsr())&& BookingDB.checkDoubleBooked(bookFlightID, homepage.getUsr())){
+			}else if(BookingDB.checkConflict(getBookFlightID(), homepage.getUsr())&& BookingDB.checkDoubleBooked()){
 				AlertMessage.display("Flight Conflict",
 						"The FlightID entered creates a conflict with a previously booked flight & has already been booked.");
-			}else if(BookingDB.checkDoubleBooked(bookFlightID, homepage.getUsr())) {
+			}else if(BookingDB.checkDoubleBooked()) {
 				AlertMessage.display("Flight Conflict",
 						"The FlightID entered has already been booked.");
 			}
@@ -249,5 +250,13 @@ public class SearchFlights extends Application implements EventHandler<ActionEve
 		}
 		return connection;
 
+	}
+
+	public static String getBookFlightID() {
+		return bookFlightID;
+	}
+
+	public static void setBookFlightID(String bookFlightID) {
+		SearchFlights.bookFlightID = bookFlightID;
 	}
 }
