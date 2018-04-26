@@ -1,6 +1,7 @@
 package Database;
 
 import BusinessLogic.Customer;
+import GUI.AlertMessage;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -8,6 +9,7 @@ import javafx.stage.Stage;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -65,10 +67,32 @@ public class CustomerDB  {
 
 		try {
 			Connection connection = getConnection();
+
+					String str= "SELECT CPassword FROM Customer WHERE CUsername ='"+username+"'";
+					
+					// Prepare Statement
+					PreparedStatement statement = connection.prepareStatement(str);
+
+					// Execute Statement
+					ResultSet resultSet = statement.executeQuery();
+				
+					while(resultSet.next()) {
+					
+						return resultSet.getString(1);
+							}
+						
+					} catch (Exception ex) {}
+		return "error";
+	}
+	
+	public static String getUserSecurityQ(String username) {
+
+		try {
+			Connection connection = getConnection();
 			
 			try {
 				// select query to run
-				String str = "select CPassword from Customer" + "where CUsername='"+ username+"';";
+				String str = "select SecurityQuestion from Customer where CUsername='"+ username+"';";
 
 				// Prepare Statement
 				Statement statement = connection.prepareStatement(str);
@@ -89,9 +113,8 @@ public class CustomerDB  {
 
 		} catch (Exception e) {
 		}
-		return "No password found";
+		return "";
 	}
-	
 	public static String getUserSecurityA(String username) {
 
 		try {
@@ -99,7 +122,7 @@ public class CustomerDB  {
 			
 			try {
 				// select query to run
-				String str = "select SecurityA from Customer where CUsername='"+ username+"';";
+				String str = "select SecurityAnswer from Customer where CUsername='"+ username+"';";
 
 				// Prepare Statement
 				Statement statement = connection.prepareStatement(str);
@@ -120,7 +143,7 @@ public class CustomerDB  {
 
 		} catch (Exception e) {
 		}
-		return "No password found";
+		return "";
 	}
 
 }

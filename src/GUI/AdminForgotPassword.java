@@ -1,20 +1,19 @@
 package GUI;
 
-import Database.CustomerDB;
+import Database.AdminDB;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class CustomerForgotPassword {
-
+public class AdminForgotPassword {
+	
 	public void start(Stage primaryStage) {
 		primaryStage.setTitle("WrightFlights ARS Main Menu");
 		
@@ -33,7 +32,7 @@ public class CustomerForgotPassword {
 		GridPane.setHalignment(enter1, HPos.CENTER);
 		
 		enter1.setOnAction(a->{
-		Text LSecurityQ= new Text(CustomerDB.getUserSecurityQ(username.getText()));
+		Text LSecurityQ= new Text(AdminDB.getAdminSecurityQ(username.getText()));
 		Label LSecurityA= new Label("Security Question Answer");
 		TextField SecurityA= new TextField();
 		Button enter2 = new Button("Enter");
@@ -45,8 +44,8 @@ public class CustomerForgotPassword {
 		
 			enter2.setOnAction(b->{
 				
-				if(SecurityA.getText().equalsIgnoreCase(CustomerDB.getUserSecurityA(username.getText()))){
-					Text passwordText= new Text(CustomerDB.getUserPW(username.getText()));
+				if(SecurityA.getText().equalsIgnoreCase(AdminDB.getAdminSecurityA(username.getText()))){
+					Text passwordText= new Text(AdminDB.getAdminPW(username.getText()));
 					grid.add(passwordText, 1, 7);
 					
 				}else {
