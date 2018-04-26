@@ -164,7 +164,7 @@ public void start(Stage primaryStage) throws Exception{
 	bookFlightID=flightIDText.getText();
 	
 	bkFlight.setOnAction(f->{
-
+		
 		BookFlight bookFlight= new BookFlight();
 		bookFlight.start(new Stage());
 	}
@@ -194,9 +194,10 @@ public String getChoice(ChoiceBox<String>dropdown) {
 	return dbSearch;
 }
 
-/*public int conflictCheck(StringBuilder DepartureTime, StringBuilder ArrivalTime,) {
+public boolean conflictCheck(String DepartureDate, String DepartureTime, String ArrivalTime) {
 	
-}*/
+	
+}
 	public static Connection getConnection() {
 		Connection connection=null;
 		try {
