@@ -8,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import GUI.viewBookedFlight;
 
 public class CustomerMain extends Application{
 	public static void main(String [] args) {
@@ -18,7 +19,7 @@ public void start(Stage primaryStage) {
 	primaryStage.setTitle("Welcome User");
 	
 	Button searchFlights=new Button("Search Flights");
-	Button viewBookedFlights= new Button("View Booked Flights");
+	Button viewBookings=new Button("View Booked Flights");
 	Button logout= new Button("Log out");
 	Button removeFlight= new Button("Remove Flight");
 	
@@ -28,9 +29,9 @@ public void start(Stage primaryStage) {
 	grid.setPadding(new Insets(20,20,20,20));
 	
 	grid.add(searchFlights, 0, 0);
-	grid.add(viewBookedFlights, 0, 1);
 	grid.add(logout, 0, 3);
 	grid.add(removeFlight, 0, 2);
+	grid.add(viewBookings, 0,1);
 	
 	grid.setAlignment(Pos.CENTER);
 	grid.setStyle("-fx-background-color: LAVENDER;");
@@ -40,23 +41,28 @@ public void start(Stage primaryStage) {
 	primaryStage.setScene(scene);
 	primaryStage.show();
 	
+	viewBookings.setOnAction(p->{
+		viewBookings main=new viewBookings();
+		try {
+			main.start(primaryStage);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	});
 	removeFlight.setOnAction(f->{
 		try {
 		UserRemoveFlight main=new UserRemoveFlight();
-		main.start(primaryStage);
-		}catch(Exception e) {
-			
-		}});
-	
-	
-	viewBookedFlights.setOnAction(f->{
-		try {
-			viewBookedFlights main= new viewBookedFlights();
-			main.start(primaryStage);
+		main.start(new Stage());
 		}catch(Exception e) {
 			
 		}
+		finally {
+			primaryStage.close();
+		}
 	});
+	
+	
 	searchFlights.setOnAction(a->{
 		try {
 			SearchFlights sf=new SearchFlights();
@@ -75,6 +81,6 @@ public void start(Stage primaryStage) {
 			primaryStage.close();
 		}
 	});
-	}
+}
 
 }

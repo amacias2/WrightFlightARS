@@ -4,13 +4,12 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+
 import BusinessLogic.Flight;
 import Database.CustomerDB;
-import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -20,8 +19,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-public class viewBookedFlights extends Application implements EventHandler<ActionEvent> {
-
+public class viewBookings {
 	public void start(Stage primaryStage) throws Exception {
 		AnchorPane anchor = new AnchorPane();
 		anchor.setPadding(new Insets(20, 20, 20, 20));
@@ -34,7 +32,6 @@ public class viewBookedFlights extends Application implements EventHandler<Actio
 			AdminMain main= new AdminMain();
 			main.start(new Stage());
 		});
-		
 		
 		TableColumn<Flight, String> column1 = new TableColumn<Flight, String>("Flight#");
 		column1.setCellValueFactory(new PropertyValueFactory<>("flightNum"));
@@ -114,12 +111,10 @@ public class viewBookedFlights extends Application implements EventHandler<Actio
 			statement.close();
 			myResult.close();
 			connection.close();
-
-		} catch (Exception a) {
-			
-		}
-			});
-		
+			} catch (Exception a) {
+				
+			}
+				});
 		
 		table.setLayoutX(20);
 		table.setLayoutY(100);
@@ -140,10 +135,6 @@ public class viewBookedFlights extends Application implements EventHandler<Actio
 			}
 			return null;
 		}
-		@Override
-		public void handle(ActionEvent event) {
-			// TODO Auto-generated method stub
-			
-		}
+		
 		
 }

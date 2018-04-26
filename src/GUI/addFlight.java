@@ -62,6 +62,7 @@ public class addFlight extends Application{
 		
 		
 		Button confirmAdd= new Button("Confirm add");
+		Button mainB=new Button("Back");
 		
 		GridPane gridPane = new GridPane();
 		gridPane.setMinSize(500, 500);
@@ -113,15 +114,22 @@ public class addFlight extends Application{
 		
 		
 		gridPane.add(confirmAdd, 6, 5);
+		gridPane.add(mainB,6,7);
 		gridPane.setStyle("-fx-background-color: SALMON;");
 		Scene scene = new Scene(gridPane);
 		Addstage.setTitle("Adding a new flight");
 		Addstage.setScene(scene);
 		Addstage.show();
 		
+		mainB.setOnAction(h->{
+			try {
+				homepage home=new homepage();
+				home.start(new Stage());
+			}finally {
+				Addstage.close();
+			}
+		});
 		confirmAdd.setOnAction(b->{
-			
-			
 			try {
 			Flight flight1=new Flight(flightNumText.getText(),fDateText.getText(),DepartureTimeText.getText(),ArrivalTimeText.getText(),flightDurationText.getText(),
 					fToText.getText(),fFromText.getText(),AirlineNameText.getText(),Integer.parseInt(capacityText.getText()),0,DestinationAirportText.getText(),FlightPriceText.getText(),BoardingTimeText.getText(),flightIDText.getText());

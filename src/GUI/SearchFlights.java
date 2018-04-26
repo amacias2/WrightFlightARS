@@ -54,9 +54,11 @@ public class SearchFlights extends Application implements EventHandler<ActionEve
 		Button userView = new Button("Main page");
 		userView.setOnAction(a -> {
 			if (AdminDB.isAdmin(homepage.getUsr())) {
+				primaryStage.close();
 				AdminMain main = new AdminMain();
 				main.start(new Stage());
 			} else {
+				primaryStage.close();
 				CustomerMain cmain = new CustomerMain();
 				cmain.start(new Stage());
 

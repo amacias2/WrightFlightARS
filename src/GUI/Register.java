@@ -123,7 +123,7 @@ public class Register extends Application {
 
 		gridPane.add(buttonRegisterAdmin, 3, 3);
 		gridPane.add(buttonRegisterUser, 2, 3);
-		gridPane.add(backtomain, 3, 4);
+		gridPane.add(backtomain, 2, 4);
 		
 		gridPane.add(AdminPWLabel, 3, 4);
 		gridPane.add(AdminPWText, 3, 5);
