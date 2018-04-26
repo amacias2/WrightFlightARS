@@ -33,14 +33,13 @@ public class homepage extends Application  {
 public void start(Stage primaryStage) {
 	primaryStage.setTitle("Log in");
 	
-	
-	
 	Label LUsername= new Label("Username");
 	TextField username= new TextField();
 	Label LPassword= new Label("Password");
 	PasswordField password= new PasswordField();
 	
 	Button login = new Button("Login");
+	Button loginAdmin= new Button("Login Admin");
 	Button register = new Button("Register");
 	
 	GridPane grid= new GridPane();
@@ -54,12 +53,14 @@ public void start(Stage primaryStage) {
 	grid.add(password, 1, 1);
 	grid.add(login, 0, 3);
 	grid.add(register, 1, 3);
+	grid.add(loginAdmin, 2, 3);
 	
 	grid.setAlignment(Pos.CENTER);
 	username.setAlignment(Pos.BOTTOM_RIGHT);
 	password.setAlignment(Pos.BOTTOM_LEFT);
 	
 	GridPane.setHalignment(login, HPos.LEFT);
+	GridPane.setHalignment(loginAdmin, HPos.CENTER);
 	GridPane.setHalignment(register, HPos.RIGHT);
 	
 	Scene scene=new Scene(grid, 300, 150);
@@ -68,6 +69,34 @@ public void start(Stage primaryStage) {
 	primaryStage.show();
 	
 	//register.setOnAction(e->{});
+	
+	loginAdmin.setOnAction(b->{
+		try {
+			Connection connection = getConnection();
+			
+			String pw= password.getText().trim();
+			String usr= username.getText().trim();
+	
+					String str= "SELECT APassword FROM Admin WHERE UserName ='"+usr+"'";
+					
+					// Prepare Statement
+					PreparedStatement statement = connection.prepareStatement(str);
+
+					// Execute Statement
+					ResultSet resultSet = statement.executeQuery();
+				
+					while(resultSet.next()) {
+					
+						if(resultSet.getString(1).equals(pw)) 
+						
+							System.out.println("Valid pw");
+							else
+							System.out.println("Inalid pw");}
+					 connection.close();
+					} catch (Exception ex) {
+
+				} 
+	});
 	
 	login.setOnAction(a-> {
 		
