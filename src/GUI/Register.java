@@ -177,7 +177,10 @@ public class Register extends Application {
 				AlertMessage.display("Authentication Failure", "Please verify admin password needed to register as a new admin and try again");
 			}
 		});
+		
 	}
+	
+	
 
 	public static Connection getConnection() {
 		Connection connection = null;

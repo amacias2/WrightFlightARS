@@ -23,6 +23,8 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 public class homepage extends Application  {
+	private static String usr="";
+	private static String pw="";
 @Override
 public void start(Stage primaryStage) {
 	primaryStage.setTitle("WrightFlights ARS Main Menu");
@@ -86,6 +88,7 @@ public void start(Stage primaryStage) {
 		
 	});
 	
+	
 	loginAdmin.setOnAction(b->{
 		try {
 			Connection connection = getConnection();
@@ -119,14 +122,15 @@ public void start(Stage primaryStage) {
 				} 
 	});
 	
+	
 	login.setOnAction(a-> {
 		
 		try {
 			
 			Connection connection = getConnection();
 			
-			String pw= password.getText().trim();
-			String usr= username.getText().trim();
+			pw= password.getText().trim();
+			usr= username.getText().trim();
 		
 
 					String str= "SELECT CPassword FROM Customer WHERE CUsername ='"+usr+"'";
