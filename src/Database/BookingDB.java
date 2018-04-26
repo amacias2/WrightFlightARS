@@ -81,7 +81,6 @@ public class BookingDB {
 	
 	
 	
-	
 	public static Connection getConnection() throws Exception{
 		try {
 		Class.forName("com.mysql.jdbc.Driver");
