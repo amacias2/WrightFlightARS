@@ -1,6 +1,8 @@
 package Database;
 
 import BusinessLogic.Flight;
+import GUI.AlertMessage;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -88,6 +90,8 @@ public class FlightDB {
 			// send to gui error dialog box
 		} 
 	}
+	
+	
 
 	
 

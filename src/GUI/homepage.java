@@ -23,7 +23,7 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 public class homepage extends Application  {
-	private static String usr="";
+	static String usr="";
 	private static String pw="";
 @Override
 public void start(Stage primaryStage) {

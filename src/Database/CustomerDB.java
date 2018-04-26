@@ -145,5 +145,26 @@ public class CustomerDB  {
 		}
 		return "";
 	}
+	public static String getUserSSN(String username) {
+
+		try {
+			Connection connection = getConnection();
+
+					String str= "SELECT Cssn FROM Customer WHERE CUsername ='"+username+"'";
+					
+					// Prepare Statement
+					PreparedStatement statement = connection.prepareStatement(str);
+
+					// Execute Statement
+					ResultSet resultSet = statement.executeQuery();
+				
+					while(resultSet.next()) {
+					
+						return resultSet.getString(1);
+							}
+						
+					} catch (Exception ex) {}
+		return "error";
+	}
 
 }
