@@ -63,15 +63,16 @@ public class FlightDB {
 		try {
 			connection = DriverManager.getConnection("jdbc:mysql://localhost/WrightFlights?useSSL=false", "root",
 					"root");
+			
 			try {
 				// select query to run
 				String str = "SELECT * FROM Flight"
-						+ " Where fTo like'\\%"+toText+"\\%"+toState+"\\% AND"
-						+" fFrom like'\\%"+fromText+"\\%"+fromState+"\\% AND"
-						+" fDate like'\\%"+month+"\\%"+day+"\\%" +year+"\\% AND"
-						+" DepartureTime like'\\%"+time+"\\%"+am_pm;
+						+ " Where fTo like'\\%"+toText+"\\%"+toState+"\\%' AND"
+						+" fFrom like'\\%"+fromText+"\\%"+fromState+"\\%' AND"
+						+" fDate like'\\%"+month+"\\%"+day+"\\%" +year+"\\%' AND"
+						+" DepartureTime like'\\%"+time+"\\%"+am_pm+"'";
 						
-
+				
 				// Prepare Statement
 				Statement statement = connection.prepareStatement(str);
 
@@ -79,7 +80,7 @@ public class FlightDB {
 				ResultSet resultSet= statement.executeQuery(str);
 				
 				while(resultSet.next()) {
-					System.out.println(resultSet.getString(1) +" "+resultSet.getString(2) +" "+resultSet.getString(3) +" "+resultSet.getString(4) +" "+resultSet.getString(5) +" "+resultSet.getString(6) +" "+resultSet.getString(7) +" "+resultSet.getString(8) +" "+resultSet.getString(9) +" "+resultSet.getString(10) +" "+resultSet.getString(11) +" "+resultSet.getString(12) +" "+resultSet.getString(13) +" "+resultSet.getString(14));
+					System.out.println(resultSet.getString("flightID") +" "+resultSet.getString("flightNum") +" "+resultSet.getString("fDate") +" "+resultSet.getString("fTo") +" "+resultSet.getString("fFrom") +" "+resultSet.getString("BoardingTime") +" "+resultSet.getString("DepartureTime") +" "+resultSet.getString("ArrivalTime") +" "+resultSet.getString("FlightDuration") +" "+resultSet.getString("DestinationAirport") +" "+resultSet.getString(11) +" "+resultSet.getString("AirlineName") +" "+resultSet.getString("Capacity") +" "+resultSet.getString("BookedNum")+resultSet.getString("Flight_Price"));
 
 			}} catch (Exception ex) {
 				// send to gui error dialog box
@@ -98,4 +99,4 @@ public class FlightDB {
 		
 	}
 
-}}
+}
