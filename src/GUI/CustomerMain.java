@@ -8,7 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-import GUI.viewBookedFlight;
+import GUI.viewBookings;
 
 public class CustomerMain extends Application{
 	public static void main(String [] args) {
