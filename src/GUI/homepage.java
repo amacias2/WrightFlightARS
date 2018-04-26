@@ -104,9 +104,13 @@ public void start(Stage primaryStage) {
 					while(resultSet.next()) {
 					
 						if(resultSet.getString(1).equals(pw)) { 
-						
-							System.out.println("Valid pw");
-						primaryStage.close();}
+							try {
+								AdminMain aM= new AdminMain();
+								aM.start(new Stage());
+							}finally{
+								primaryStage.close();
+							}
+						}
 							else
 							System.out.println("Inalid pw");}
 					 connection.close();
@@ -136,11 +140,13 @@ public void start(Stage primaryStage) {
 					while(resultSet.next()) {
 					
 						if(resultSet.getString(1).equals(pw)) {
-							
-							System.out.print(resultSet.getString(1));
-							primaryStage.close();}
-						
-							else {	
+							try {
+								CustomerMain cM= new CustomerMain();
+								cM.start(new Stage());
+							}finally{
+								primaryStage.close();
+							}
+						} else {	
 							AlertMessage.display("Incorrect Login", "Username or password is incorrect. Please try again");}
 					 connection.close();}
 					} catch (Exception ex) {
