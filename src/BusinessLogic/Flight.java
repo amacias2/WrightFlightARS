@@ -2,7 +2,7 @@ package BusinessLogic;
 
 
 public class Flight {
-	private static String flightID;
+	protected static String flightID;
 	private String flightNum;
 	private StringBuilder departureDate = new StringBuilder();
 	private StringBuilder departureTime = new StringBuilder();
@@ -14,13 +14,15 @@ public class Flight {
 	private int capacity;
 	private int numBooked;
 	private String destinationAirport;
-	private double flight_price;
+	private String flight_price;
 	private StringBuilder boardingTime = new StringBuilder();
+
+	
 
 	public Flight(String flightNum, StringBuilder departureDate, StringBuilder departureTime, StringBuilder arrivalTime,
 			StringBuilder flightDuration, String to, String from, String airlineName, int capacity, int numBooked,
-			String destinationAirport, double flight_price, StringBuilder boardingTime) {
-		super();
+			String destinationAirport, String flight_price, StringBuilder boardingTime) {
+		
 		this.flightNum = flightNum;
 		this.departureDate = departureDate;
 		this.departureTime = departureTime;
@@ -154,11 +156,11 @@ public class Flight {
 
 	}
 
-	public double getFlight_price() {
+	public String getFlight_price() {
 		return flight_price;
 	}
 
-	public void setFlight_price(double flight_price) {
+	public void setFlight_price(String flight_price) {
 		this.flight_price = flight_price;
 	}
 

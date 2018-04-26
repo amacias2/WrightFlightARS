@@ -1,6 +1,6 @@
 package Database;
 
-import BusinessLogic.User;
+import BusinessLogic.Customer;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -12,7 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class UserDB extends Application {
+public class CustomerDB  {
 
 	public static Connection getConnection() throws Exception{
 		try {
@@ -25,7 +25,7 @@ public class UserDB extends Application {
 		}
 		return null;
 	}
-	public static void addUser(User a) throws Exception {
+	public static void addUser(Customer a) throws Exception {
 
 		
 		try {
@@ -91,10 +91,36 @@ public class UserDB extends Application {
 		}
 		return "No password found";
 	}
-	@Override
-	public void start(Stage arg0) throws Exception {
-		// TODO Auto-generated method stub
-		
+	
+	public static String getUserSecurityA(String username) {
+
+		try {
+			Connection connection = getConnection();
+			
+			try {
+				// select query to run
+				String str = "select SecurityA from Customer where CUsername='"+ username+"';";
+
+				// Prepare Statement
+				Statement statement = connection.prepareStatement(str);
+
+				// Execute Statement
+				
+				ResultSet resultSet = statement.executeQuery(str);
+				
+				while(resultSet.next()) {
+				return resultSet.getString(1);
+				}
+
+			} catch (Exception ex) {
+
+			} finally {
+				connection.close();
+			}
+
+		} catch (Exception e) {
+		}
+		return "No password found";
 	}
 
 }

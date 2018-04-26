@@ -1,25 +1,33 @@
 package BusinessLogic;
 import java.util.Date;
+import BusinessLogic.Flight;
 import javafx.application.Application;
 
-public class Booking {
+public class Booking extends Flight {
 	
 	private static int confirmationNum;
 	private long timeBooked;
 	private String status;
 	private String seatAssignment;
-	private double bookedPrice;
+	private String bookedPrice;
 	private String ssn;
 	
 	
-	public Booking(Flight flightID, String ssn) {
+	
+
+	
+	
+	public Booking(String flightNum, StringBuilder departureDate, StringBuilder departureTime,
+			StringBuilder arrivalTime, StringBuilder flightDuration, String to, String from, String airlineName,
+			int capacity, int numBooked, String destinationAirport, String flight_price, StringBuilder boardingTime) {
+		super(flightNum, departureDate, departureTime, arrivalTime, flightDuration, to, from, airlineName, capacity, numBooked,
+				destinationAirport, flight_price, boardingTime);
 		this.confirmationNum=confirmationNum++;
 		this.timeBooked= new Date().getTime();
 		this.status= "Booked";
-		this.bookedPrice= flightID.getFlight_price();
+		this.bookedPrice= flightNum.getFlight_price();
 		this.ssn= ssn;
 	}
-	
 	public int getConfirmationNum() {
 		return confirmationNum;
 	}
@@ -44,10 +52,10 @@ public class Booking {
 	public void setSeatAssignment(String seatAssignment) {
 		this.seatAssignment = seatAssignment;
 	}
-	public double getBookedPrice() {
+	public String getBookedPrice() {
 		return bookedPrice;
 	}
-	public void setBookedPrice(double bookedPrice) {
+	public void setBookedPrice(String bookedPrice) {
 		this.bookedPrice = bookedPrice;
 	}
 	

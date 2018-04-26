@@ -1,22 +1,16 @@
 package GUI;
 
-import BusinessLogic.User;
-import GUI.Register;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import GUI.Register;
 
-import BusinessLogic.Admin;
-import BusinessLogic.Login;
+
 
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.Event;
-import javafx.event.EventHandler;
+
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -31,7 +25,7 @@ import javafx.stage.Stage;
 public class homepage extends Application  {
 @Override
 public void start(Stage primaryStage) {
-	primaryStage.setTitle("Log in");
+	primaryStage.setTitle("WrightFlights ARS Main Menu");
 	
 	Label LUsername= new Label("Username");
 	TextField username= new TextField();
@@ -52,8 +46,8 @@ public void start(Stage primaryStage) {
 	grid.add(LPassword, 0, 1);
 	grid.add(password, 1, 1);
 	grid.add(login, 0, 3);
-	grid.add(register, 1, 3);
-	grid.add(loginAdmin, 2, 3);
+	grid.add(register, 2, 3);
+	grid.add(loginAdmin, 1, 3);
 	
 	grid.setAlignment(Pos.CENTER);
 	username.setAlignment(Pos.BOTTOM_RIGHT);
@@ -63,12 +57,21 @@ public void start(Stage primaryStage) {
 	GridPane.setHalignment(loginAdmin, HPos.CENTER);
 	GridPane.setHalignment(register, HPos.RIGHT);
 	
-	Scene scene=new Scene(grid, 300, 150);
+	Scene scene=new Scene(grid, 400, 200);
 	primaryStage.setTitle("Login");
 	primaryStage.setScene(scene);
 	primaryStage.show();
 	
-	//register.setOnAction(e->{});
+	register.setOnAction(e->{
+		
+		try {
+		Register user= new Register();
+		user.start(new Stage());
+	}finally{
+		primaryStage.close();
+	}
+		
+	});
 	
 	loginAdmin.setOnAction(b->{
 		try {
@@ -87,9 +90,10 @@ public void start(Stage primaryStage) {
 				
 					while(resultSet.next()) {
 					
-						if(resultSet.getString(1).equals(pw)) 
+						if(resultSet.getString(1).equals(pw)) { 
 						
 							System.out.println("Valid pw");
+						primaryStage.close();}
 							else
 							System.out.println("Inalid pw");}
 					 connection.close();
@@ -118,13 +122,14 @@ public void start(Stage primaryStage) {
 				
 					while(resultSet.next()) {
 					
-						if(resultSet.getString(1).equals(pw)) 
+						if(resultSet.getString(1).equals(pw)) {
 						
 							System.out.println("Valid pw");
-							else
-								
+							primaryStage.close();}
+						
+							else {	
 							AlertMessage.display("Incorrect Login", "Username or password is incorrect. Please try again");}
-					 connection.close();
+					 connection.close();}
 					} catch (Exception ex) {
 
 				} 
