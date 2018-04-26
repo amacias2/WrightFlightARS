@@ -32,9 +32,13 @@ public class Main extends Application {
 	splashScreenDelay.setOnFinished(y -> {
 	    primaryStage.show();
 	    spashScreen.hideWindow();
+	    
+	    homepage main= new homepage();
+	    main.start(primaryStage);
 	});
 	
 	splashScreenDelay.playFromStart();
     }
+    
 
 }

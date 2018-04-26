@@ -38,6 +38,8 @@ public class User implements registerUser, Login {
 		this.securityA = securityA;
 		this.ssn = ssn;
 		this.zipCode = zipCode;
+		
+		
 	}
 
 	// getters and setters for all attributes

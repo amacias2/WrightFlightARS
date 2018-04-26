@@ -1,4 +1,10 @@
 package GUI;
+import BusinessLogic.User;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -10,7 +16,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-
+import Database.UserDB;
 public class Register extends Application {
 	@Override
 	public void start(Stage Registrationstage) {
@@ -41,8 +47,11 @@ public class Register extends Application {
 		Text emailLabel=new Text("Email:");
 		TextField emailText= new TextField();
 		
-		Text ssnLabel=new Text("SSN:");
+		Text ssnLabel=new Text("SSN:XXX-XX-XXXX");
 		TextField ssnText= new TextField();
+		
+		Text countryLabel=new Text("Country");
+		TextField countryText= new TextField();
 		
 		Text securityQLable= new Text("Security question");
 		ChoiceBox securityQBox = new ChoiceBox();
@@ -51,7 +60,8 @@ public class Register extends Application {
 		Text securityALabel=new Text("Security answer:");
 		TextField securityAText= new TextField();
 		
-		Button buttonRegister = new Button("Register");
+		Button buttonRegisterUser = new Button("User Registration");
+		Button buttonRegisterAdmin = new Button("Admin Registration");
 		
         GridPane gridPane = new GridPane();     
 	      gridPane.setMinSize(500, 500);   
@@ -78,17 +88,20 @@ public class Register extends Application {
 	      gridPane.add(stateLabel, 0, 5);       
 	      gridPane.add(stateText, 1, 5); 
 	      
-	      gridPane.add(usernameLabel, 0, 6);       
-	      gridPane.add(usernameText, 1, 6); 
+	      gridPane.add(countryLabel, 0, 6);
+	      gridPane.add(countryText, 1, 6);
 	      
-	      gridPane.add(passwordLabel, 0, 7);       
-	      gridPane.add(passwordText, 1, 7);
+	      gridPane.add(usernameLabel, 0, 7);       
+	      gridPane.add(usernameText, 1, 7); 
 	      
-	      gridPane.add(emailLabel, 0, 8);       
-	      gridPane.add(emailText, 1, 8); 
+	      gridPane.add(passwordLabel, 0, 8);       
+	      gridPane.add(passwordText, 1, 8);
 	      
-	      gridPane.add(ssnLabel, 0, 9);       
-	      gridPane.add(ssnText, 1, 9);      
+	      gridPane.add(emailLabel, 0, 9);       
+	      gridPane.add(emailText, 1, 9); 
+	      
+	      gridPane.add(ssnLabel, 0, 10);       
+	      gridPane.add(ssnText, 1, 10);      
 	       
 	      gridPane.add(securityQLable, 2, 0); 
 	      gridPane.add(securityQBox, 3, 0);    
@@ -96,19 +109,41 @@ public class Register extends Application {
 	      gridPane.add(securityALabel, 2, 1);       
 	      gridPane.add(securityAText, 3, 1);
 	      
-	      gridPane.add(buttonRegister, 2, 2);
+	      
+	      
+	      gridPane.add(buttonRegisterAdmin, 3, 3);
+	      gridPane.add(buttonRegisterUser, 2, 3);
 	      gridPane.setStyle("-fx-background-color: YELLOW;");
 	      Scene scene=new Scene(gridPane);
 	      Registrationstage.setTitle("Registration Form");
 	      Registrationstage.setScene(scene);
 	      Registrationstage.show();
 	      
-	      buttonRegister.setOnAction(a -> {
-	    	  //what happens when button register is clicked
-	    	  //test below
-	    	  System.out.println("Welcome");
+	      buttonRegisterUser.setOnAction(a -> {
+	    	  	try {
+	    	  		User user = new User(fnameText.getText(),mnameText.getText(),lnameText.getText(),usernameText.getText(),passwordText.getText(),addressText.getText(), stateText.getText(),countryText.getText(),emailText.getText(),(String)securityQBox.getValue(),securityAText.getText(),ssnText.getText(), zipText.getText());
+	    	  		UserDB.addUser(user);
+	    	  	}catch(Exception e) {
+	    	  		System.out.println("Error occured");
+	    	  		
+	    	  	}
 	      });
 	      
+	      buttonRegisterAdmin.setOnAction(a -> {
+	      
+	}
+	public static Connection getConnection() {
+		Connection connection=null;
+		try {
+		Class.forName("com.mysql.jdbc.Driver");
+		connection = DriverManager.getConnection("jdbc:mysql://localhost/WrightFlights?useSSL=false", "root",
+				"root"); 
+		}catch(Exception e) {
+			System.out.println("Cannot connect");
+		}
+		return connection;
+		
+		
 	}
 	public static void main(String []args) {
 		launch(args);

@@ -75,9 +75,6 @@ public void start(Stage primaryStage) {
 			
 			Connection connection = getConnection();
 			
-			System.out.println("1");
-			
-			
 			String pw= password.getText().trim();
 			String usr= username.getText().trim();
 		
