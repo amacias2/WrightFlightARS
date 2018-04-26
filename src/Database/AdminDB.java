@@ -147,6 +147,36 @@ public class AdminDB {
 		}
 		return null;
 	}
+	
+	public static boolean isAdmin(String username) {
+		try {
+			Connection connection = getConnection();
+			
+			try {
+				// select query to run
+				String str = "select Username from Admin where Username='"+ username+"';";
+
+				// Prepare Statement
+				Statement statement = connection.prepareStatement(str);
+
+				// Execute Statement
+				
+				ResultSet resultSet = statement.executeQuery(str);
+				if(!resultSet.next()) {
+					return false;
+				}else
+					return true;
+
+			} catch (Exception ex) {
+
+			} finally {
+				connection.close();
+			}
+
+		} catch (Exception e) {
+		}
+		return true;
+	}
 
 	
 	

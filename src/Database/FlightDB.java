@@ -28,72 +28,8 @@ public class FlightDB {
 			connection.close();
 		} catch (Exception ex) {
 			// send to gui error dialog box
-		} 
+		}
 	}
-
-	public static String getDepartureDate(String flightID) {
-		try {
-			Connection connection = getConnection();
-			// select query to run
-			String str = "SELECT fDate FROM Flight where flightID= '"+flightID+"';";
-
-			// Prepare Statement
-			Statement statement = connection.prepareStatement(str);
-
-			// Execute Statement
-			ResultSet resultSet= statement.executeQuery(str);
-			while(resultSet.next()) {
-				return resultSet.getString("fDate");
-			}
-			connection.close();
-		} catch (Exception ex) {
-			// send to gui error dialog box
-		} 
-	}
-	
-	public static String getDepartureTime(String flightID) {
-		try {
-			Connection connection = getConnection();
-			// select query to run
-			String str = "SELECT DepartureTime FROM Flight where flightID= '"+flightID+"';";
-
-			// Prepare Statement
-			Statement statement = connection.prepareStatement(str);
-
-			// Execute Statement
-			ResultSet resultSet= statement.executeQuery(str);
-			while(resultSet.next()) {
-				return resultSet.getString("DepartureTime");
-			}
-			connection.close();
-		} catch (Exception ex) {
-			// send to gui error dialog box
-		} 
-	}
-	
-	public static String getArrivalTime(String flightID) {
-		try {
-			Connection connection = getConnection();
-			// select query to run
-			String str = "SELECT ArrivalTime FROM Flight where flightID= '"+flightID+"';";
-
-			// Prepare Statement
-			Statement statement = connection.prepareStatement(str);
-
-			// Execute Statement
-			ResultSet resultSet= statement.executeQuery(str);
-			while(resultSet.next()) {
-				return resultSet.getString("ArrivalTime");
-			}
-			connection.close();
-		} catch (Exception ex) {
-			// send to gui error dialog box
-		} 
-	}
-	
-	
-
-	
 
 	public static Connection getConnection() {
 		Connection connection = null;
@@ -106,6 +42,5 @@ public class FlightDB {
 		}
 		return connection;
 
-	
-
+	}
 }

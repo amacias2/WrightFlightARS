@@ -1,6 +1,8 @@
 package GUI;
 
 import java.sql.Connection;
+import GUI.AdminMain;
+import GUI.CustomerMain;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,6 +11,8 @@ import java.sql.SQLException;
 import BusinessLogic.Booking;
 import BusinessLogic.Customer;
 import BusinessLogic.Flight;
+import Database.AdminDB;
+import Database.BookingDB;
 import Database.CustomerDB;
 import Database.FlightDB;
 import javafx.application.Application;
@@ -49,8 +53,14 @@ public class SearchFlights extends Application implements EventHandler<ActionEve
 
 		Button userView = new Button("Main page");
 		userView.setOnAction(a -> {
-			// main user page
-			// add try and catch
+			if(AdminDB.isAdmin(homepage.getUsr())) {
+				AdminMain main= new AdminMain();
+				main.start(new Stage());}
+			else {
+				CustomerMain cmain=new CustomerMain();
+				cmain.start(new Stage());
+			}
+			
 		});
 
 		TextField search = new TextField();
@@ -164,12 +174,24 @@ public class SearchFlights extends Application implements EventHandler<ActionEve
 		bookFlightID = flightIDText.getText();
 
 		bkFlight.setOnAction(f -> {
-			
-			Connection connection=getConnection();
-			
-			String Cssn= CustomerDB.getUserSSN(homepage.usr);
-			
-			String checkDoubleBooked="SELECT flightID, cSSN FROM booking where cSSN="+Cssn+"';";
+			if(BookingDB.checkConflict(bookFlightID, homepage.getUsr())) {
+				AlertMessage.display("Flight Conflict",
+						"WARNING!!! The FlightID entered creates a conflict with a previously booked flight!");
+				primaryStage.close();
+				BookFlight main2= new BookFlight();
+				main2.start(new Stage());
+			}else if(!BookingDB.checkConflict(bookFlightID, homepage.getUsr())&& !BookingDB.checkDoubleBooked(bookFlightID, homepage.getUsr())){
+				primaryStage.close();
+				BookFlight main2= new BookFlight();
+				main2.start(new Stage());
+				
+			}else if(BookingDB.checkConflict(bookFlightID, homepage.getUsr())&& BookingDB.checkDoubleBooked(bookFlightID, homepage.getUsr())){
+				AlertMessage.display("Flight Conflict",
+						"The FlightID entered creates a conflict with a previously booked flight & has already been booked.");
+			}else if(BookingDB.checkDoubleBooked(bookFlightID, homepage.getUsr())) {
+				AlertMessage.display("Flight Conflict",
+						"The FlightID entered has already been booked.");
+			}
 			
 		
 		});

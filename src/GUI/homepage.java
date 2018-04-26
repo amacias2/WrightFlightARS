@@ -23,7 +23,7 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 public class homepage extends Application  {
-	static String usr="";
+	private static String usr="";
 	private static String pw="";
 @Override
 public void start(Stage primaryStage) {
@@ -130,10 +130,10 @@ public void start(Stage primaryStage) {
 			Connection connection = getConnection();
 			
 			pw= password.getText().trim();
-			usr= username.getText().trim();
+			setUsr(username.getText().trim());
 		
 
-					String str= "SELECT CPassword FROM Customer WHERE CUsername ='"+usr+"'";
+					String str= "SELECT CPassword FROM Customer WHERE CUsername ='"+getUsr()+"'";
 					
 					// Prepare Statement
 					PreparedStatement statement = connection.prepareStatement(str);
@@ -176,5 +176,11 @@ public void start(Stage primaryStage) {
 	}
 	public static void main(String[] args) {
 		launch(args);
+	}
+	public static String getUsr() {
+		return usr;
+	}
+	public static void setUsr(String usr) {
+		homepage.usr = usr;
 	}
 }

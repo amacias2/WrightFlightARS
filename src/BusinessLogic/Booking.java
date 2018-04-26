@@ -17,15 +17,16 @@ public class Booking extends Flight {
 
 	
 	
-	public Booking(String flightNum, StringBuilder departureDate, StringBuilder departureTime,
-			StringBuilder arrivalTime, StringBuilder flightDuration, String to, String from, String airlineName,
-			int capacity, int numBooked, String destinationAirport, String flight_price, StringBuilder boardingTime) {
+	
+	public Booking(String flightNum, String departureDate, String departureTime, String arrivalTime,
+			String flightDuration, String to, String from, String airlineName, int capacity, int numBooked,
+			String destinationAirport, String flight_price, String boardingTime) {
 		super(flightNum, departureDate, departureTime, arrivalTime, flightDuration, to, from, airlineName, capacity, numBooked,
 				destinationAirport, flight_price, boardingTime);
 		this.confirmationNum=confirmationNum++;
 		this.timeBooked= new Date().getTime();
 		this.status= "Booked";
-		this.bookedPrice= flightNum.getFlight_price();
+		this.bookedPrice=flight_price;
 		this.ssn= ssn;
 	}
 	public int getConfirmationNum() {
