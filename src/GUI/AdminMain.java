@@ -23,6 +23,8 @@ public void start(Stage primaryStage) {
 	Button addFlight=new Button("Add a Flight");
 	Button removeFlight=new Button("Remove a Flight");
 	Button updateFlight= new Button("Update a Flight");
+	Button searchFlight= new Button("Search Flight");
+	Button logout=new Button("Log out");
 	
 	GridPane grid= new GridPane();
 	grid.setHgap(5);
@@ -32,8 +34,10 @@ public void start(Stage primaryStage) {
 	grid.add(addFlight, 0, 0);
 	grid.add(removeFlight, 0, 1);
 	grid.add(updateFlight, 0, 2);
+	grid.add(logout,1,4);
 	
 	grid.setAlignment(Pos.CENTER);
+	grid.setStyle("-fx-background-color: LIGHTBLUE;");
 	
 	Scene scene=new Scene(grid, 600, 300);
 	primaryStage.setTitle("Admin");
@@ -48,5 +52,23 @@ public void start(Stage primaryStage) {
 			primaryStage.close();
 		}
 	});
+	
+	searchFlight.setOnAction(b->{
+		try {
+			
+		}finally {
+			primaryStage.close();
+		}
+	});
+	
+	logout.setOnAction(c->{
+		try {
+			homepage hp=new homepage();
+			hp.start(new Stage());
+		}finally {
+			primaryStage.close();
+		}
+	});
+	
 }
 }
