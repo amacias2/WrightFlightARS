@@ -1,11 +1,12 @@
 package GUI;
 
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 
 import BusinessLogic.Booking;
+import BusinessLogic.Customer;
 import BusinessLogic.Flight;
-import BusinessLogic.User;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -62,7 +63,7 @@ public void start(Stage primaryStage) throws Exception{
 	username.setContentDisplay(javafx.scene.control.ContentDisplay.CENTER);
 	username.setLayoutX(900.0);
 	username.setLayoutY(10.0);
-	username.setText("Logged in as: "+ User.getUsername());
+	username.setText("Logged in as: "+ Customer.getUsername());
 	username.setTextAlignment(javafx.scene.text.TextAlignment.RIGHT);
 	username.setFont(new Font(20.0));
 	
